@@ -1,4 +1,5 @@
 -- Standard awesome library
+local gears = require("gears")
 local awful = require("awful")
 -- Widget and layout library
 local wibox = require("wibox")
@@ -16,17 +17,22 @@ client.connect_signal("request::titlebars", function(c)
         end),
     }
 
-    awful.titlebar(c).widget = {
+    awful
+        .titlebar(c, {
+            size = 0.5,
+            position = "left",
+        })
+        .widget = {
         { -- Left
-            awful.titlebar.widget.iconwidget(c),
+            --awful.titlebar.widget.iconwidget(c),
             buttons = buttons,
             layout  = wibox.layout.fixed.horizontal
         },
         { -- Middle
-            { -- Title
-                halign = "center",
-                widget = awful.titlebar.widget.titlewidget(c)
-            },
+            --{ -- Title
+                --halign = "center",
+                --widget = awful.titlebar.widget.titlewidget(c)
+            --},
             buttons = buttons,
             layout  = wibox.layout.flex.horizontal
         },
@@ -36,9 +42,17 @@ client.connect_signal("request::titlebars", function(c)
             awful.titlebar.widget.stickybutton   (c),
             awful.titlebar.widget.ontopbutton    (c),
             awful.titlebar.widget.closebutton    (c),
+            buttons = buttons,
             layout = wibox.layout.fixed.horizontal()
         },
         layout = wibox.layout.align.horizontal
     }
+end)
+
+-- Bling
+client.connect_signal("manage", function(c)
+    c.shape = function(cr, w, h)
+        gears.shape.rounded_rect(cr, w, h, 0)
+    end
 end)
 -- }}}
