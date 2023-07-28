@@ -16,13 +16,12 @@ awful.mouse.append_global_mousebindings({
 -- }}}
 
 -- {{{ Key bindings
-
 -- General Awesome keys
 awful.keyboard.append_global_keybindings({
     -- Defaults
-    awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
+    awful.key({ modkey }, "s", hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
-    awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
+    awful.key({ modkey }, "w", function () mymainmenu:show() end,
               {description = "show main menu", group = "awesome"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
