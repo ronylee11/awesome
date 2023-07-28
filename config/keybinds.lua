@@ -82,7 +82,7 @@ awful.keyboard.append_global_keybindings({
     awful.key({ altkey }, "t", function() awful.util.spawn_with_shell("feh --zoom 110 -F $HOME/timetable.png") end,
               {description = "timetable", group = "launcher"}) ,
     -- Powermenu
-    awful.key({ modkey, "Shift" }, "l", function() awful.util.spawn_with_shell("$HOME/.config/rofi/powermenu/powermenu.sh") end,
+    awful.key({ "Ctrl" }, "l", function() awful.util.spawn_with_shell("$HOME/.config/rofi/powermenu/powermenu.sh") end,
               {description = "powermenu", group = "launcher"}) ,
     -- Kill
     awful.key({ altkey, "Ctrl" }, "x", function() awful.util.spawn("xkill") end,
@@ -156,14 +156,14 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey }, "h", function() awful.tag.incmwfact(-0.05) end,
               {description = "decrease master width factor", group = "layout"}),
     -- Change Number of Master Windows
-    awful.key({ modkey, "Shift" }, "h", function() awful.tag.incnmaster(1, nil, true) end,
+    awful.key({ modkey, "Shift" }, "l", function() awful.tag.incnmaster(1, nil, true) end,
               {description = "increase the number of master clients", group = "layout"}),
-    awful.key({ modkey, "Shift" }, "l", function() awful.tag.incnmaster(-1, nil, true) end,
+    awful.key({ modkey, "Shift" }, "h", function() awful.tag.incnmaster(-1, nil, true) end,
               {description = "decrease the number of master clients", group = "layout"}),
     -- Change Number of Columns
-    awful.key({ modkey, "Control" }, "h", function() awful.tag.incncol(1, nil, true) end,
+    awful.key({ modkey, "Control" }, "l", function() awful.tag.incncol(1, nil, true) end,
               {description = "increase the number of columns", group = "layout"}),
-    awful.key({ modkey, "Control" }, "l", function() awful.tag.incncol(-1, nil, true) end,
+    awful.key({ modkey, "Control" }, "h", function() awful.tag.incncol(-1, nil, true) end,
               {description = "decrease the number of columns", group = "layout"}),
     -- Change Layout
     awful.key({ modkey }, "space", function() awful.layout.inc(1) end,
