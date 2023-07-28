@@ -280,7 +280,7 @@ client.connect_signal("request::default_keybindings", function()
         -- Hide Top Bar
         awful.key({ modkey }, "b",
                   function(c)
-                      c.screen.mywibar.visible = not c.screen.mywibar.visible
+                      c.screen.mywibox.visible = not c.screen.mywibox.visible
                   end,
                   { description = "toggle top bar", group = "client" }),
         -- Close Window
