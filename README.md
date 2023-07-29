@@ -27,43 +27,43 @@ Here are the default keybindings that I have customized to my likings:<br />
 Switching tags:<br />
 
 ```
-Modkey+1 - switch to tag 1<br />
-Modkey+2 - switch to tag 2<br />
-Modkey+3 - switch to tag 3<br />
-Modkey+4 - switch to tag 4<br />
-Modkey+5 - switch to tag 5<br />
-Modkey+F1 - switch to tag 6<br />
-Modkey+F2 - switch to tag 7<br />
-Modkey+F3 - switch to tag 8<br />
-Modkey+F4 - switch to tag 9<br />
-Modkey+F5 - switch to tag 10<br />
+Modkey+1 - switch to tag 1
+Modkey+2 - switch to tag 2
+Modkey+3 - switch to tag 3
+Modkey+4 - switch to tag 4
+Modkey+5 - switch to tag 5
+Modkey+F1 - switch to tag 6
+Modkey+F2 - switch to tag 7
+Modkey+F3 - switch to tag 8
+Modkey+F4 - switch to tag 9
+Modkey+F5 - switch to tag 10
 ```
 
-Switch Focus between apps:<br />
+Switch Focus between windows:<br />
 
 ```
-Modkey+K - next app<br />
-Modkey+J - previous app<br />
-Modkey+Enter - move currently focus app to main stack(switching app order)<br />
+Modkey+K - next window
+Modkey+J - previous window
+Modkey+Space - switch layout
 ```
 
-Moving app between tags:<br />
-focus on the app that u want to move,<br />
+Moving window between tags:<br />
+focus on the window that u want to move,<br />
 
 ```
-ModKey+Shift+1-F5 - move app to tag 1-10<br />
+ModKey+Shift+1-F5 - move window to tag 1-10
 ```
 
 Launching app:<br />
 
 ```
-Modkey+P - runs rofi launchpad, choose with arrow keys and enter to launch<br />
+Modkey+P - runs rofi launchpad, choose with arrow keys and enter to launch
 ```
 
 Launching terminal(alacritty):<br />
 
 ```
-Modkey+Shift+Enter - launch alacritty terminal<br />
+Modkey+Shift+Enter - launch alacritty terminal
 ```
 
 (Do feel free to change and modify them to your own likings!)
