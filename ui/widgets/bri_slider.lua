@@ -4,6 +4,15 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local helpers = require("helpers")
 
+local function get_brightness()
+    local script = "brightnessctl | grep -i  'current' | awk '{ print $4}' | tr -d \"(%)\""
+    local handle = io.popen(script)
+    local result = handle:read("*a")
+    handle:close()
+
+    return tonumber(result:match("%d+"))
+end
+
 local slider = wibox.widget({
     bar_shape = require("helpers").rrect(9),
     bar_height = 6,
@@ -12,7 +21,7 @@ local slider = wibox.widget({
     handle_shape = gears.shape.circle,
     handle_color = beautiful.yellow,
     handle_width = 12,
-    value = 25,
+    value = get_brightness(),
     widget = wibox.widget.slider,
 })
 

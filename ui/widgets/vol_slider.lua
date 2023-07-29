@@ -4,6 +4,15 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local helpers = require("helpers")
 
+local function get_volume()
+    local script = "pamixer --get-volume"
+    local handle = io.popen(script)
+    local result = handle:read("*a")
+    handle:close()
+
+    return tonumber(result:match("%d+"))
+end
+
 local slider = wibox.widget({
     bar_shape = require("helpers").rrect(9),
     bar_height = 6,
@@ -12,7 +21,7 @@ local slider = wibox.widget({
     handle_shape = gears.shape.circle,
     handle_color = beautiful.blue,
     handle_width = 12,
-    value = 75,
+    value = get_volume(),
     widget = wibox.widget.slider,
 })
 
