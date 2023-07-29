@@ -23,6 +23,11 @@ mytextclock = wibox.widget.textclock()
 local time = wibox.widget({
     widget = wibox.container.background,
     bg = beautiful.bg_normal,
+    buttons = {
+        awful.button({}, 1, function()
+            require("ui.popup.calender")()
+        end),
+    },
     {
         widget = wibox.container.margin,
         margins = 10,
@@ -33,6 +38,8 @@ local time = wibox.widget({
         },
     },
 })
+
+helpers.add_hover_cursor(time, "hand1")
 
 local action_icon = require("ui.gooey").make_button({
     icon = "bell2",
