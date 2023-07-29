@@ -180,50 +180,101 @@ naughty.connect_signal("request::display", function(n)
         spacing = dpi(7),
     })
 
-    naughty.layout.box({
-        notification = n,
-        type = "notification",
-        bg = beautiful.bg_normal,
-        shape = helpers.rrect(beautiful.rounded),
-        widget_template = {
-            {
+    -- when notification message is long, change the wibox width
+    if n.message and (string.len(n.message) > 80) then
+        naughty.layout.box {
+            notification = n,
+            type = "notification",
+            bg = beautiful.bg_normal,
+            shape = helpers.rrect(beautiful.rounded),
+            widget_template = {
                 {
                     {
                         {
-                            notif_info,
                             {
+                                image_n,
                                 {
-                                    title_n,
-                                    message_n,
-                                    layout = wibox.layout.fixed.vertical,
-                                    spacing = dpi(3),
+                                    {
+                                        title_n,
+                                        message_n,
+                                        {
+                                            actions,
+                                            bg = beautiful.bg_2,
+                                            shape = helpers.rrect(beautiful.rounded),
+                                            widget = wibox.container.background,
+                                        },
+                                        spacing = dpi(5),
+                                        layout = wibox.layout.fixed.vertical,
+                                    },
+                                    margins = dpi(10),
+                                    widget = wibox.container.margin,
                                 },
-                                margins = { left = dpi(6) },
-                                widget = wibox.container.margin,
+                                spacing = dpi(10),
+                                layout = wibox.layout.fixed.horizontal,
                             },
-                            layout = wibox.layout.fixed.vertical,
-                            spacing = dpi(16),
+                            bg = beautiful.bg_2,
+                            shape = helpers.rrect(beautiful.rounded),
+                            widget = wibox.container.background,
                         },
-                        nil,
-                        image_n,
-                        layout = wibox.layout.align.horizontal,
-                        expand = "none",
-                    },
-                    {
-                        { actions, layout = wibox.layout.fixed.vertical },
-                        margins = { top = dpi(20) },
-                        visible = n.actions and #n.actions > 0,
+                        margins = dpi(10),
                         widget = wibox.container.margin,
                     },
-                    layout = wibox.layout.fixed.vertical,
+                    strategy = "exact",
+                    width = dpi(400),
+                    height = dpi(150),
+                    widget = wibox.container.constraint,
                 },
-                margins = dpi(18),
-                widget = wibox.container.margin,
+                bg = beautiful.bg_normal,
+                shape = helpers.rrect(beautiful.rounded),
+                widget = wibox.container.background,
             },
-            widget = wibox.container.background,
-            forced_width = dpi(340),
-            shape = helpers.rrect(beautiful.rounded),
+        }
+    else
+        naughty.layout.box({
+            notification = n,
+            type = "notification",
             bg = beautiful.bg_normal,
-        },
-    })
+            shape = helpers.rrect(beautiful.rounded),
+            widget_template = {
+                {
+                    {
+                        {
+                            {
+                                notif_info,
+                                {
+                                    {
+                                        title_n,
+                                        message_n,
+                                        layout = wibox.layout.fixed.vertical,
+                                        spacing = dpi(3),
+                                    },
+                                    margins = { left = dpi(6) },
+                                    widget = wibox.container.margin,
+                                },
+                                layout = wibox.layout.fixed.vertical,
+                                spacing = dpi(16),
+                            },
+                            nil,
+                            image_n,
+                            layout = wibox.layout.align.horizontal,
+                            expand = "none",
+                        },
+                        {
+                            { actions, layout = wibox.layout.fixed.vertical },
+                            margins = { top = dpi(20) },
+                            visible = n.actions and #n.actions > 0,
+                            widget = wibox.container.margin,
+                        },
+                        layout = wibox.layout.fixed.vertical,
+                    },
+                    margins = dpi(18),
+                    widget = wibox.container.margin,
+                },
+                widget = wibox.container.background,
+                forced_width = dpi(340),
+                shape = helpers.rrect(beautiful.rounded),
+                bg = beautiful.bg_normal,
+            },
+        })
+    end
 end)

@@ -6,6 +6,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Import library
 local volume = require "lib.volume"
 local brightness = require "lib.brightness"
+local naughty = require("naughty")
 
 -- {{{ Mouse bindings
 awful.mouse.append_global_mousebindings({
@@ -91,6 +92,9 @@ awful.keyboard.append_global_keybindings({
               {description = "train", group = "launcher"}),
     -- Spawn widget
     awful.key({ altkey }, "c", function() F.action.toggle() end, 
+              {description = "spawn widget", group = "launcher"}),
+    -- Test
+    awful.key({ altkey, "Shift" }, "x", function() naughty.notify({ title = "Achtung!", text = "You're idling You're idling You're idling You're idling You're idling You're idling You're idling You're idling", timeout = 0 }) end, 
               {description = "spawn widget", group = "launcher"}),
 })
 
