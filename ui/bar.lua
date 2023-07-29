@@ -8,6 +8,8 @@ local wibox = require("wibox")
 -- Xresources DPI
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
+-- helper functions
+local helpers = require("helpers")
 
 -- {{{ Wibar
 
@@ -58,6 +60,8 @@ battery_timer = timer({ timeout = 10 })
 battery_timer:connect_signal("timeout", battery_update)
 battery_timer:start()
 --
+
+helpers.add_hover_cursor(action_icon, "hand1")
 
 screen.connect_signal("request::desktop_decoration", function(s)
     -- Each screen has its own tag table.
