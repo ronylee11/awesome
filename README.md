@@ -4,6 +4,12 @@ My AwesomeWM Build with designs based on personal preferences aka. my ULTIMATE b
 This is a unique design of window manager that will have 10 tags <br/>
 with first 5 tags showing as page 1, another 5 tags showing as page 2
 
+# Progress
+
+Screenshot of Current Progress
+
+![Current Progress](./.github/demo.gif)
+
 # Design
 
 My Designs on Paper <br/>
@@ -11,10 +17,6 @@ Design of bar
 ![Design of bar](./.github/design.png)
 Design of titlebar on file browser
 ![Design of titlebar](./.github/booklet.png)
-
-Screenshot of Current Progress
-
-![Current Progress](./.github/curr_progress.jpg)
 
 # Usage
 
