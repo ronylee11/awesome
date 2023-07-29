@@ -76,22 +76,22 @@ awful.keyboard.append_global_keybindings({
               {description = "powermenu", group = "launcher"}),
     -- Select Emoji
     awful.key({ modkey }, ".", function() awful.util.spawn_with_shell("rofi -modi emoji -show emoji") end,
-              {description = "emoji", group = "launcher"}) ,
+              {description = "emoji", group = "launcher"}),
     -- Show Timetable
     awful.key({ altkey }, "t", function() awful.util.spawn_with_shell("feh --zoom 110 -F $HOME/timetable.png") end,
-              {description = "timetable", group = "launcher"}) ,
+              {description = "timetable", group = "launcher"}),
     -- Powermenu
     awful.key({ "Ctrl", "Shift" }, "l", function() awful.util.spawn_with_shell("$HOME/.config/rofi/powermenu/powermenu.sh") end,
-              {description = "powermenu", group = "launcher"}) ,
+              {description = "powermenu", group = "launcher"}),
     -- Kill
     awful.key({ altkey, "Ctrl" }, "x", function() awful.util.spawn("xkill") end,
-              {description = "powermenu", group = "launcher"}) ,
+              {description = "powermenu", group = "launcher"}),
     -- Summon Train -- F13
     awful.key({}, "XF86Tools", function() awful.util.spawn("alacritty -e \"sl\"") end,
-              {description = "train", group = "launcher"}) ,
-    awful.key({ modkey, "Control" }, "p", function()
-        awful.util.spawn("arandr")
-    end, { description = "multi display config", group = "display" }),
+              {description = "train", group = "launcher"}),
+    -- Spawn widget
+    awful.key({ altkey }, "c", function() F.action.toggle() end, 
+              {description = "spawn widget", group = "launcher"}),
 })
 
 -- Tags related keybindings
