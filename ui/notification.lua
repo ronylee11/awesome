@@ -181,7 +181,7 @@ naughty.connect_signal("request::display", function(n)
     })
 
     -- when notification message is long, change the wibox width
-    if n.message and (string.len(n.message) > 80) then
+    if n.message and (string.len(n.message) > 30) then
         naughty.layout.box {
             notification = n,
             type = "notification",
@@ -191,8 +191,8 @@ naughty.connect_signal("request::display", function(n)
                 {
                     {
                         {
-                            {
-                                image_n,
+                            --{
+                                --image_n,
                                 {
                                     {
                                         title_n,
@@ -209,14 +209,14 @@ naughty.connect_signal("request::display", function(n)
                                     margins = dpi(10),
                                     widget = wibox.container.margin,
                                 },
-                                spacing = dpi(10),
-                                layout = wibox.layout.fixed.horizontal,
-                            },
+                                --spacing = dpi(10),
+                                --layout = wibox.layout.fixed.horizontal,
+                            --},
                             bg = beautiful.bg_2,
                             shape = helpers.rrect(beautiful.rounded),
                             widget = wibox.container.background,
                         },
-                        margins = dpi(10),
+                        margins = dpi(20),
                         widget = wibox.container.margin,
                     },
                     strategy = "exact",
