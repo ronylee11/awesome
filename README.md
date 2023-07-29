@@ -6,8 +6,10 @@ with first 5 tags showing as page 1, another 5 tags showing as page 2
 
 # Design
 
-My Designs on Paper
+My Designs on Paper <br/>
+Design of bar
 ![Design of bar](./.github/design.png)
+Design of titlebar on file browser
 ![Design of titlebar](./.github/booklet.png)
 
 Screenshot of Current Progress
