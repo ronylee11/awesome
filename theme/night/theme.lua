@@ -89,4 +89,69 @@ rnotification.connect_signal("request::rules", function()
     })
 end)
 
+--menu
+theme.menu_height               = dpi(6) * 4
+theme.menu_width                = dpi(6) * 10 * 3
+theme.menu_border_width         = dpi(2)
+theme.menu_border_color         = theme.bg_focus
+
+-- power
+theme.lock_icon         = theme.confdir .. "/power/lock.svg"
+theme.logout_icon       = theme.confdir .. "/power/logout.svg"
+theme.sleep_icon        = theme.confdir .. "/power/sleep.svg"
+theme.restart_icon      = theme.confdir .. "/power/restart.svg"
+theme.shutdown_icon     = theme.confdir .. "/power/shutdown.svg"
+
+-- tag
+theme.terminal_icon     = theme.confdir .. "/tag/terminal.svg"
+theme.code_icon         = theme.confdir .. "/tag/code.svg"
+theme.chrome_icon       = theme.confdir .. "/tag/chrome.svg"
+theme.files_icon        = theme.confdir .. "/tag/files.svg"
+theme.document_icon     = theme.confdir .. "/tag/document.svg"
+theme.media_icon        = theme.confdir .. "/tag/media.svg"
+theme.tools_icon        = theme.confdir .. "/tag/tools.svg"
+theme.chat_icon         = theme.confdir .. "/tag/chat.svg"
+theme.game_icon         = theme.confdir .. "/tag/game.svg"
+theme.general_icon      = theme.confdir .. "/tag/general.svg"
+
+-- arrow
+theme.arrow_down_icon   = theme.confdir .. "/other/arrow_down.svg"
+theme.arrow_up_icon     = theme.confdir .. "/other/arrow_up.svg"
+theme.arrow_right_icon  = theme.confdir .. "/other/arrow_right.svg"
+theme.arrow_left_icon   = theme.confdir .. "/other/arrow_left.svg"
+
+-- other icon
+theme.menu_submenu_icon = theme.confdir .. "/other/submenu.svg"
+theme.notification_icon = theme.confdir .. "/other/notification.svg"
+theme.setting_icon      = theme.confdir .. "/other/setting.svg"
+theme.refresh_icon      = theme.confdir .. "/other/refresh.svg"
+theme.book_icon         = theme.confdir .. "/other/book.svg"
+theme.keyboard_icon     = theme.confdir .. "/other/keyboard.svg"
+theme.awesome_icon      = theme.confdir .. "/other/awesomewm.svg"
+theme.os_icon           = theme.confdir .. "/other/archlinux.svg"
+theme.dashboard_icon    = theme.confdir .. "/other/dashboard.svg"
+theme.menu_icon         = theme.confdir .. "/other/menu.svg"
+theme.bin_icon          = theme.confdir .. "/other/bin.svg"
+theme.image_icon        = theme.confdir .. "/other/image.svg"
+theme.camera_icon       = theme.confdir .. "/other/camera.svg"
+
+theme.download_icon     = theme.confdir .. "/other/download.svg"
+theme.upload_icon       = theme.confdir .. "/other/upload.svg"
+theme.hard_drive_icon   = theme.confdir .. "/other/hard_drive.svg"
+theme.temperature_icon  = theme.confdir .. "/other/temperature.svg"
+theme.gpu_icon          = theme.confdir .. "/other/gpu.svg"
+theme.memory_icon       = theme.confdir .. "/other/memory.svg"
+theme.cpu_icon          = theme.confdir .. "/other/cpu.svg"
+theme.clock_icon        = theme.confdir .. "/other/clock.svg"
+theme.volume_icon       = theme.confdir .. "/other/volume.svg"
+theme.volume_mute_icon  = theme.confdir .. "/other/volume_mute.svg"
+theme.mic_icon          = theme.confdir .. "/other/mic.svg"
+theme.mic_off_icon      = theme.confdir .. "/other/mic_off.svg"
+
+theme.add_icon          = theme.confdir .. "/other/add.svg"
+theme.subtract_icon     = theme.confdir .. "/other/subtract.svg"
+
+-- color icon
+theme.package_icon      = theme.confdir .. "/other/package.svg"
+
 return theme

@@ -80,6 +80,7 @@ specifically only on vscode terminal, use agnoster omf theme on fish shell<br />
 Inspirations from: <br/>
 edr3x - [https://github.com/edr3x/.dotfiles](https://github.com/edr3x/.dotfiles) <br/>
 rklyz - [https://github.com/rklyz/MyRice](https://github.com/rklyz/MyRice) <br/>
+HoNamHuong - [https://github.com/HoNamDuong/.dotfiles.git](https://github.com/HoNamDuong/.dotfiles.git)
 
 Huge shoutout to them <3
 

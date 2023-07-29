@@ -7,10 +7,11 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 local volume = require "lib.volume"
 local brightness = require "lib.brightness"
 local naughty = require("naughty")
+local mousemenu = require("ui.popup.mousemenu")
 
 -- {{{ Mouse bindings
 awful.mouse.append_global_mousebindings({
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
+    awful.button({ }, 3, function () mousemenu:toggle() end),
     --awful.button({ }, 4, awful.tag.viewprev),
     --awful.button({ }, 5, awful.tag.viewnext),
 })
