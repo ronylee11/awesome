@@ -8,7 +8,7 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
-theme.confdir = os.getenv("HOME") .. "/.config/awesome/theme"
+theme.confdir = os.getenv("HOME") .. "/.config/awesome/theme/night"
 theme.wallpaper = theme.confdir .. "/wall/fabrizio-conti-_6LZtmrss08-unsplash.jpg"
 theme.font_name = "Iosevka Nerd Font"
 theme.taglist_font = "FiraCode Nerd Font, 14"
