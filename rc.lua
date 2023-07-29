@@ -44,6 +44,8 @@ modkey = "Mod4"
 altkey = "Mod1"
 -- }}}
 
+F = {}
+
 require("ui/menu")
 require("ui/layout")
 require("ui/bar")
@@ -53,6 +55,8 @@ require("ui/notification")
 require("config/wallpaper")
 require("config/keybinds")
 require("config/rules")
+
+require("ui/popup/action")
 
 -- Enable sloppy focus, so that focus follows mouse.
 client.connect_signal("mouse::enter", function(c)

@@ -259,6 +259,7 @@ end
 
 client.connect_signal("request::default_mousebindings", function()
     awful.mouse.append_client_mousebindings({
+        -- Mouse Clicks
         awful.button({ }, 1, function (c) c:activate { context = "mouse_click" } end,
                   { description = "mouse click", group = "client" }),
         awful.button({ modkey }, 1, function (c) c:activate { context = "mouse_click", action = "mouse_move"  } end,
@@ -281,6 +282,8 @@ client.connect_signal("request::default_keybindings", function()
         awful.key({ modkey }, "b",
                   function(c)
                       c.screen.mywibox.visible = not c.screen.mywibox.visible
+                      c.screen.mywibox2.visible = not c.screen.mywibox2.visible
+                      c.screen.mywibox4.visible = not c.screen.mywibox4.visible
                   end,
                   { description = "toggle top bar", group = "client" }),
         -- Close Window
