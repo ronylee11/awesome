@@ -28,7 +28,7 @@ end)
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/theme.lua")
+beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/night/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
