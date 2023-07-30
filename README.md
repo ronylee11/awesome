@@ -4,9 +4,9 @@ My AwesomeWM Build with designs based on personal preferences aka. my ULTIMATE b
 This is a unique design of window manager that will have 10 tags <br/>
 with first 5 tags showing as page 1, another 5 tags showing as page 2
 
-# Progress
+# Demo
 
-Screenshot of Current Progress
+demo of current progress
 
 ![Current Progress](./.github/demo.gif)
 
@@ -44,7 +44,8 @@ Switch Focus between windows:<br />
 ```
 Modkey+K - next window
 Modkey+J - previous window
-Modkey+Space - switch layout
+Modkey+Space - switch to next layout
+Modkey+Shift+Space - switch to previous layout
 ```
 
 Moving window between tags:<br />
