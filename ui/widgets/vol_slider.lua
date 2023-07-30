@@ -13,6 +13,16 @@ local function get_volume()
     return tonumber(result:match("%d+"))
 end
 
+-- check if muted or not
+local function get_muted()
+    local script = "pamixer --get-mute"
+    local handle = io.popen(script)
+    local result = handle:read("*a")
+    handle:close()
+
+    return result:match("true")
+end
+
 local slider = wibox.widget({
     bar_shape = require("helpers").rrect(9),
     bar_height = 6,
@@ -39,6 +49,12 @@ local vol_slider = wibox.widget({
     layout = wibox.layout.fixed.horizontal,
     spacing = 0,
 })
+
+if get_muted() == "true" then
+    vol_slider.children[1].markup = helpers.colorize_text("  ", beautiful.red)
+    vol_slider.children[2].bar_active_color = beautiful.red
+    vol_slider.children[2].handle_color = beautiful.red
+end
 
 awful.spawn.easy_async_with_shell("pamixer --get-volume", function(stdout)
     local value = string.gsub(stdout, "^%s*(.-)%s*$", "%1")
