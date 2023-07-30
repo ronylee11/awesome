@@ -115,9 +115,9 @@ awful.keyboard.append_global_keybindings({
 -- Focus related keybindings
 awful.keyboard.append_global_keybindings({
     -- Window Focus
-    awful.key({ modkey }, "j", function() awful.client.focus.byidx(1) end, 
+    awful.key({ modkey }, "j", function() awful.client.focus.byidx(-1) end, 
               { description = "focus next by index", group = "client" }),
-    awful.key({ modkey }, "k", function() awful.client.focus.byidx(-1) end, 
+    awful.key({ modkey }, "k", function() awful.client.focus.byidx(1) end, 
               { description = "focus previous by index", group = "client" }),
     awful.key({ altkey }, "Tab", 
               function() 
@@ -147,9 +147,9 @@ awful.keyboard.append_global_keybindings({
 -- Layout related keybindings
 awful.keyboard.append_global_keybindings({
     -- Swap Window
-    awful.key({ modkey, "Shift" }, "j", function() awful.client.swap.byidx(1) end,
+    awful.key({ modkey, "Shift" }, "j", function() awful.client.swap.byidx(-1) end,
               {description = "swap with next client by index", group = "client"}),
-    awful.key({ modkey, "Shift" }, "k", function() awful.client.swap.byidx(-1) end,
+    awful.key({ modkey, "Shift" }, "k", function() awful.client.swap.byidx(1) end,
               {description = "swap with previous client by index", group = "client"}),
     -- Jump to urgent client
     awful.key({ modkey }, "u", awful.client.urgent.jumpto,
