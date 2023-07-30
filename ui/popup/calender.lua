@@ -80,7 +80,7 @@ local calendar = awful.popup({
     border_width = 2,
     border_color = beautiful.bg_normal,
     placement = function(c)
-        (awful.placement.top_left)(c, { margins = { top = dpi(45), left = dpi(15) } })
+        (awful.placement.top_left)(c, { margins = { top = dpi(70), left = dpi(15) } })
     end,
     ontop = true,
 })
