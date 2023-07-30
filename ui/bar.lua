@@ -151,6 +151,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
         end
     end
 
+    local wibar_border_radius = 20
 
     -- Create the wibox
     -- Left wibox
@@ -162,7 +163,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
         visible = true,
         height = dpi(38),
         width    = dpi(110),
-        shape = rrect(0),
+        shape = rrect(wibar_border_radius),
         screen   = s,
     }
 
@@ -177,7 +178,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
         height = dpi(38),
         width    = dpi(462),
         --width = s.geometry.width - dpi(30),
-        shape = rrect(0),
+        shape = rrect(wibar_border_radius),
         screen = s,
     }
 
@@ -203,7 +204,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
         visible = true,
         height = dpi(38),
         width    = dpi(265),
-        shape = rrect(0),
+        shape = rrect(wibar_border_radius),
         screen = s,
     }
 
