@@ -5,6 +5,8 @@ local beautiful = require("beautiful")
 local helpers = require("helpers")
 local naughty = require("naughty")
 local rubato = require("lib.rubato")
+local xresources = require("beautiful.xresources")
+local dpi = xresources.apply_dpi
 
 F.action = {}
 
@@ -280,7 +282,7 @@ local action = awful.popup({
         },
     },
     placement = function(c)
-        (awful.placement.right)(c, { margins = { bottom = 250, right = 60 } })
+        (awful.placement.top_right)(c, { margins = { top = dpi(55) } })
     end,
     ontop = true,
     visible = false,
