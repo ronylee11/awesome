@@ -141,9 +141,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
             c.screen.mywibox4.visible = true
         end
     end
-    
+
     client.connect_signal("property::fullscreen", remove_wibox)
-    client.connect_signal("property::maximized", remove_wibox)
     ---}}}
     -- Create rounded rectangle shape (in one line)
     local function rrect(radius)
@@ -162,7 +161,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
         margins = {top = dpi(4)},
         visible = true,
         height = dpi(38),
-        width    = 110,
+        width    = dpi(110),
         shape = rrect(0),
         screen   = s,
     }
@@ -176,7 +175,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
         top = dpi(4),
         visible = true,
         height = dpi(38),
-        width    = 462,
+        width    = dpi(462),
         --width = s.geometry.width - dpi(30),
         shape = rrect(0),
         screen = s,
@@ -203,41 +202,10 @@ screen.connect_signal("request::desktop_decoration", function(s)
         top = dpi(4),
         visible = true,
         height = dpi(38),
-        width    = 265,
-        --width = s.geometry.width - dpi(30),
+        width    = dpi(265),
         shape = rrect(0),
         screen = s,
     }
-
-    --awful.screen.connect_for_each_screen(function(s)
-        --s.mywibar = awful.popup {
-            --screen  = s,
-            --placement = function(c)
-                --return awful.placement.top_right(c, { margins = 14 })
-            --end,
-            --height = 42,
-            --bg      = "#1c252acc",
-            --widget  = {
-                --{
-                    --layout = wibox.layout.fixed.horizontal,
-                    --expand = "none",
-                    --s.mytaglist,
-                    ----mycpu,
-                    ----mycputemp,
-                    ----myram,
-                    ----mybattery,
-                    ----myupdates,
-                    ----mykeyboardlayout_icon,
-                    ----mykeyboardlayout,
-                    ----mytextclock_icon,
-                    --mytextclock
-                --},
-                --widget = wibox.container.margin
-            --}
-        --}
-
-        --s.mywibox:struts({top = s.mywibox.height + beautiful.useless_gap * 2})
-    --end)
 
     s.mywibox.x = s.geometry.x + dpi(15)
     s.mywibox4.x = s.geometry.x + s.geometry.width - s.mywibox4.width - dpi(15)
@@ -246,7 +214,6 @@ screen.connect_signal("request::desktop_decoration", function(s)
         {
             {
                 layout = wibox.layout.align.horizontal,
-                --s.mytasklist, -- Middle widget
                 time,
             },
             left = dpi(15),
