@@ -182,7 +182,28 @@ naughty.connect_signal("request::display", function(n)
 
     -- when notification message is long, change the wibox width
     if n.message and (string.len(n.message) > 30) then
-        naughty.layout.box {
+        message_n = wibox.widget({
+            {
+                {
+                    markup = helpers.colorize_text(
+                    "<span weight='normal'>" .. n.message .. "</span>",
+                    beautiful.fg_normal .. "BF"
+                    ),
+                    font = beautiful.font_name .. "Bold 11",
+                    align = "left",
+                    valign = "center",
+                    wrap = "char",
+                    widget = wibox.widget.textbox,
+                },
+                forced_width = dpi(300),
+                layout = wibox.layout.fixed.horizontal,
+            },
+            margins = { right = 15 },
+            widget = wibox.container.margin,
+        })
+
+
+        naughty.layout.box({
             notification = n,
             type = "notification",
             bg = beautiful.bg_normal,
@@ -191,44 +212,43 @@ naughty.connect_signal("request::display", function(n)
                 {
                     {
                         {
-                            --{
-                                --image_n,
+                            {
+                                notif_info,
                                 {
                                     {
                                         title_n,
                                         message_n,
-                                        {
-                                            actions,
-                                            bg = beautiful.bg_2,
-                                            shape = helpers.rrect(beautiful.rounded),
-                                            widget = wibox.container.background,
-                                        },
-                                        spacing = dpi(5),
                                         layout = wibox.layout.fixed.vertical,
+                                        spacing = dpi(3),
                                     },
-                                    margins = dpi(10),
+                                    margins = { left = dpi(6) },
                                     widget = wibox.container.margin,
                                 },
-                                --spacing = dpi(10),
-                                --layout = wibox.layout.fixed.horizontal,
-                            --},
-                            bg = beautiful.bg_2,
-                            shape = helpers.rrect(beautiful.rounded),
-                            widget = wibox.container.background,
+                                layout = wibox.layout.fixed.vertical,
+                                spacing = dpi(16),
+                            },
+                            nil,
+                            image_n,
+                            layout = wibox.layout.align.horizontal,
+                            expand = "none",
                         },
-                        margins = dpi(20),
-                        widget = wibox.container.margin,
+                        {
+                            { actions, layout = wibox.layout.fixed.vertical },
+                            margins = { top = dpi(20) },
+                            visible = n.actions and #n.actions > 0,
+                            widget = wibox.container.margin,
+                        },
+                        layout = wibox.layout.fixed.vertical,
                     },
-                    strategy = "exact",
-                    width = dpi(400),
-                    height = dpi(150),
-                    widget = wibox.container.constraint,
+                    margins = dpi(18),
+                    widget = wibox.container.margin,
                 },
-                bg = beautiful.bg_normal,
-                shape = helpers.rrect(beautiful.rounded),
                 widget = wibox.container.background,
+                forced_width = dpi(440),
+                shape = helpers.rrect(beautiful.rounded),
+                bg = beautiful.bg_normal,
             },
-        }
+        })
     else
         naughty.layout.box({
             notification = n,
