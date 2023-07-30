@@ -154,4 +154,16 @@ theme.subtract_icon     = theme.confdir .. "/other/subtract.svg"
 -- color icon
 theme.package_icon      = theme.confdir .. "/other/package.svg"
 
+-- tag preview
+theme.tag_preview_widget_border_radius = 10        -- Border radius of the widget (With AA)
+theme.tag_preview_client_border_radius = 10        -- Border radius of each client in the widget (With AA)
+theme.tag_preview_client_opacity = 0.8            -- Opacity of each client
+theme.tag_preview_client_bg = theme.background           -- The bg color of each client
+theme.tag_preview_client_border_color = theme.border_color_normal -- The border color of each client
+theme.tag_preview_client_border_width = 1         -- The border width of each client
+theme.tag_preview_widget_bg = theme.background           -- The bg color of the widget
+theme.tag_preview_widget_border_color = theme.border_color_normal -- The border color of the widget
+theme.tag_preview_widget_border_width = 1         -- The border width of the widget
+theme.tag_preview_widget_margin = 0               -- The margin of the widget
+
 return theme

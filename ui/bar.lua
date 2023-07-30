@@ -72,7 +72,7 @@ helpers.add_hover_cursor(action_icon, "hand1")
 
 screen.connect_signal("request::desktop_decoration", function(s)
     -- Each screen has its own tag table.
-    awful.tag({ " ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", " ﭮ ", "  " }, s, awful.layout.layouts[1])
+    awful.tag({ "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", " ﭮ ", "  " }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -93,6 +93,60 @@ screen.connect_signal("request::desktop_decoration", function(s)
     s.mytaglist = awful.widget.taglist {
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
+        widget_template = {
+            {
+                {
+                    {
+                        id     = 'index_role',
+                        widget = wibox.widget.textbox,
+                        visible = false,
+                    },
+                    {
+                        id     = 'text_role',
+                        widget = wibox.widget.textbox,
+                    },
+                    spacing = dpi(7),
+                    layout = wibox.layout.fixed.horizontal,
+                },
+                left = dpi(0),
+                right = dpi(0),
+                widget = wibox.container.margin,
+            },
+            id     = 'background_role',
+            widget = wibox.container.background,
+            --shape = helpers.rrect(10),
+            -- Add support for hover colors and an index label
+            create_callback = function(self, c3, index, objects) --luacheck: no unused args
+                self:get_children_by_id('index_role')[1].markup = '<b> '..index..' </b>'
+                self:connect_signal('mouse::enter', function()
+
+                    -- BLING: Only show widget when there are clients in the tag
+                    if #c3:clients() > 0 then
+                        -- BLING: Update the widget with the new tag
+                        awesome.emit_signal("bling::tag_preview::update", c3)
+                        -- BLING: Show the widget
+                        awesome.emit_signal("bling::tag_preview::visibility", s, true)
+                    end
+
+                    if self.bg ~= beautiful.bg_focus then
+                        self.backup     = self.bg
+                        self.has_backup = true
+                    end
+                    self.bg = beautiful.bg_focus
+                    self.shape = helpers.rrect(10)
+                end)
+                self:connect_signal('mouse::leave', function()
+
+                    -- BLING: Turn the widget off
+                    awesome.emit_signal("bling::tag_preview::visibility", s, false)
+
+                    if self.has_backup then self.bg = self.backup end
+                end)
+            end,
+            update_callback = function(self, c3, index, objects) --luacheck: no unused args
+                self:get_children_by_id('index_role')[1].markup = '<b> '..index..' </b>'
+            end,
+        },
         buttons = {
             awful.button({ }, 1, function(t) t:view_only() end),
             awful.button({ modkey }, 1, function(t)
@@ -106,8 +160,6 @@ screen.connect_signal("request::desktop_decoration", function(s)
                                                 client.focus:toggle_tag(t)
                                             end
                                         end),
-            awful.button({ }, 4, function(t) awful.tag.viewprev(t.screen) end),
-            awful.button({ }, 5, function(t) awful.tag.viewnext(t.screen) end),
         }
     }
 

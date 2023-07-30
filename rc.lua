@@ -29,6 +29,7 @@ end)
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme/night/theme.lua")
+local bling = require("lib.bling")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
@@ -59,6 +60,7 @@ require("config/keybinds")
 require("config/rules")
 
 require("ui/popup/action")
+require("ui/popup/preview")
 
 -- Enable sloppy focus, so that focus follows mouse.
 client.connect_signal("mouse::enter", function(c)
