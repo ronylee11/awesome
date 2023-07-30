@@ -1,4 +1,5 @@
 -- Standard awesome library
+local gears = require("gears")
 local awful = require("awful")
 -- Declarative object management
 local menubar = require("menubar")
@@ -33,7 +34,7 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey, "Shift" }, "Return", function() awful.spawn(terminal) end, 
               { description = "open a terminal", group = "launcher" }),
     -- Launchers
-    awful.key({ modkey }, "p", function() awful.util.spawn_with_shell('~/.config/rofi/launcher/launcher.sh') end,
+    awful.key({ modkey }, "p", function() awful.util.spawn_with_shell(gears.filesystem.get_configuration_dir() .. 'misc/rofi/launcher/launcher.sh') end,
               { description = "run prompt", group = "launcher" }),
     awful.key({ altkey }, "Return", function() awful.util.spawn("rofi -show drun") end,
               { description = "run prompt", group = "launcher" }),
@@ -74,7 +75,7 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey, "Shift" }, "s", function() awful.util.spawn_with_shell("scrot -e 'xclip -selection clipboard -t image/png -i $f' -s $HOME/Pictures/Screenshots/%d-%m-%Y-%T-screenshot.jpg -f") end,
               {description = "take a screenshot", group = "launcher"}),
     -- Powermenu
-    awful.key({}, "XF86PowerOff", function() awful.util.spawn_with_shell("$HOME/.config/rofi/powermenu/powermenu.sh") end,
+    awful.key({}, "XF86PowerOff", function() awful.util.spawn_with_shell(gears.get_configuration_dir() .. "misc/rofi/powermenu/powermenu.sh") end,
               {description = "powermenu", group = "launcher"}),
     -- Select Emoji
     awful.key({ modkey }, ".", function() awful.util.spawn_with_shell("rofi -modi emoji -show emoji") end,
@@ -83,7 +84,7 @@ awful.keyboard.append_global_keybindings({
     awful.key({ altkey }, "t", function() awful.util.spawn_with_shell("feh --zoom 110 -F $HOME/timetable.png") end,
               {description = "timetable", group = "launcher"}),
     -- Powermenu
-    awful.key({ "Ctrl", "Shift" }, "l", function() awful.util.spawn_with_shell("$HOME/.config/rofi/powermenu/powermenu.sh") end,
+    awful.key({ "Ctrl", "Shift" }, "l", function() awful.util.spawn_with_shell(gears.get_configuration_dir() .. "misc/rofi/powermenu/powermenu.sh") end,
               {description = "powermenu", group = "launcher"}),
     -- Kill
     awful.key({ altkey, "Ctrl" }, "x", function() awful.util.spawn("xkill") end,
