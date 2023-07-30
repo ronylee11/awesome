@@ -130,8 +130,8 @@ naughty.connect_signal("request::display", function(n)
         {
             {
                 markup = helpers.colorize_text(
-                    "<span weight='normal'>" .. n.message .. "</span>",
-                    beautiful.fg_normal .. "BF"
+                "<span weight='normal'>" .. n.message .. "</span>",
+                beautiful.fg_normal .. "BF"
                 ),
                 font = beautiful.font_name .. "Bold 11",
                 align = "left",
@@ -140,7 +140,9 @@ naughty.connect_signal("request::display", function(n)
                 widget = wibox.widget.textbox,
             },
             forced_width = dpi(200),
-            layout = wibox.layout.fixed.horizontal,
+            layout = wibox.container.scroll.horizontal,
+            step_function = wibox.container.scroll.step_functions.waiting_nonlinear_back_and_forth,
+            speed = 50,
         },
         margins = { right = 15 },
         widget = wibox.container.margin,
@@ -180,191 +182,50 @@ naughty.connect_signal("request::display", function(n)
         spacing = dpi(7),
     })
 
-    -- when notification message is long, change the wibox width
-    if n.message and (string.len(n.message) > 80) then
-        message_n = wibox.widget({
+    naughty.layout.box({
+        notification = n,
+        type = "notification",
+        bg = beautiful.bg_normal,
+        shape = helpers.rrect(beautiful.rounded),
+        widget_template = {
             {
                 {
-                    markup = helpers.colorize_text(
-                    "<span weight='normal'>" .. n.message .. "</span>",
-                    beautiful.fg_normal .. "BF"
-                    ),
-                    font = beautiful.font_name .. "Bold 11",
-                    align = "left",
-                    valign = "center",
-                    wrap = "char",
-                    widget = wibox.widget.textbox,
-                },
-                forced_width = dpi(400),
-                layout = wibox.layout.fixed.horizontal,
-            },
-            margins = { right = 15 },
-            widget = wibox.container.margin,
-        })
-
-
-        naughty.layout.box({
-            notification = n,
-            type = "notification",
-            bg = beautiful.bg_normal,
-            shape = helpers.rrect(beautiful.rounded),
-            widget_template = {
-                {
                     {
                         {
+                            notif_info,
                             {
-                                notif_info,
                                 {
-                                    {
-                                        title_n,
-                                        message_n,
-                                        layout = wibox.layout.fixed.vertical,
-                                        spacing = dpi(3),
-                                    },
-                                    margins = { left = dpi(6) },
-                                    widget = wibox.container.margin,
+                                    title_n,
+                                    message_n,
+                                    layout = wibox.layout.fixed.vertical,
+                                    spacing = dpi(3),
                                 },
-                                layout = wibox.layout.fixed.vertical,
-                                spacing = dpi(16),
+                                margins = { left = dpi(6) },
+                                widget = wibox.container.margin,
                             },
-                            nil,
-                            image_n,
-                            layout = wibox.layout.align.horizontal,
-                            expand = "none",
+                            layout = wibox.layout.fixed.vertical,
+                            spacing = dpi(16),
                         },
-                        {
-                            { actions, layout = wibox.layout.fixed.vertical },
-                            margins = { top = dpi(20) },
-                            visible = n.actions and #n.actions > 0,
-                            widget = wibox.container.margin,
-                        },
-                        layout = wibox.layout.fixed.vertical,
+                        nil,
+                        image_n,
+                        layout = wibox.layout.align.horizontal,
+                        expand = "none",
                     },
-                    margins = dpi(18),
-                    widget = wibox.container.margin,
-                },
-                widget = wibox.container.background,
-                forced_width = dpi(540),
-                forced_height = dpi(200),
-                shape = helpers.rrect(beautiful.rounded),
-                bg = beautiful.bg_normal,
-            },
-        })
-
-    elseif n.message and (string.len(n.message) < 80) and (string.len(n.message) > 30) then
-        message_n = wibox.widget({
-            {
-                {
-                    markup = helpers.colorize_text(
-                    "<span weight='normal'>" .. n.message .. "</span>",
-                    beautiful.fg_normal .. "BF"
-                    ),
-                    font = beautiful.font_name .. "Bold 11",
-                    align = "left",
-                    valign = "center",
-                    wrap = "char",
-                    widget = wibox.widget.textbox,
-                },
-                forced_width = dpi(300),
-                layout = wibox.layout.fixed.horizontal,
-            },
-            margins = { right = 15 },
-            widget = wibox.container.margin,
-        })
-
-
-        naughty.layout.box({
-            notification = n,
-            type = "notification",
-            bg = beautiful.bg_normal,
-            shape = helpers.rrect(beautiful.rounded),
-            widget_template = {
-                {
                     {
-                        {
-                            {
-                                notif_info,
-                                {
-                                    {
-                                        title_n,
-                                        message_n,
-                                        layout = wibox.layout.fixed.vertical,
-                                        spacing = dpi(3),
-                                    },
-                                    margins = { left = dpi(6) },
-                                    widget = wibox.container.margin,
-                                },
-                                layout = wibox.layout.fixed.vertical,
-                                spacing = dpi(16),
-                            },
-                            nil,
-                            image_n,
-                            layout = wibox.layout.align.horizontal,
-                            expand = "none",
-                        },
-                        {
-                            { actions, layout = wibox.layout.fixed.vertical },
-                            margins = { top = dpi(20) },
-                            visible = n.actions and #n.actions > 0,
-                            widget = wibox.container.margin,
-                        },
-                        layout = wibox.layout.fixed.vertical,
+                        { actions, layout = wibox.layout.fixed.vertical },
+                        margins = { top = dpi(20) },
+                        visible = n.actions and #n.actions > 0,
+                        widget = wibox.container.margin,
                     },
-                    margins = dpi(18),
-                    widget = wibox.container.margin,
+                    layout = wibox.layout.fixed.vertical,
                 },
-                widget = wibox.container.background,
-                forced_width = dpi(440),
-                shape = helpers.rrect(beautiful.rounded),
-                bg = beautiful.bg_normal,
+                margins = dpi(18),
+                widget = wibox.container.margin,
             },
-        })
-    else
-        naughty.layout.box({
-            notification = n,
-            type = "notification",
-            bg = beautiful.bg_normal,
+            widget = wibox.container.background,
+            forced_width = dpi(340),
             shape = helpers.rrect(beautiful.rounded),
-            widget_template = {
-                {
-                    {
-                        {
-                            {
-                                notif_info,
-                                {
-                                    {
-                                        title_n,
-                                        message_n,
-                                        layout = wibox.layout.fixed.vertical,
-                                        spacing = dpi(3),
-                                    },
-                                    margins = { left = dpi(6) },
-                                    widget = wibox.container.margin,
-                                },
-                                layout = wibox.layout.fixed.vertical,
-                                spacing = dpi(16),
-                            },
-                            nil,
-                            image_n,
-                            layout = wibox.layout.align.horizontal,
-                            expand = "none",
-                        },
-                        {
-                            { actions, layout = wibox.layout.fixed.vertical },
-                            margins = { top = dpi(20) },
-                            visible = n.actions and #n.actions > 0,
-                            widget = wibox.container.margin,
-                        },
-                        layout = wibox.layout.fixed.vertical,
-                    },
-                    margins = dpi(18),
-                    widget = wibox.container.margin,
-                },
-                widget = wibox.container.background,
-                forced_width = dpi(340),
-                shape = helpers.rrect(beautiful.rounded),
-                bg = beautiful.bg_normal,
-            },
-        })
-    end
+            bg = beautiful.bg_normal,
+        },
+    })
 end)
