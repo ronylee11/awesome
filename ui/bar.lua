@@ -143,6 +143,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
     end
     
     client.connect_signal("property::fullscreen", remove_wibox)
+    client.connect_signal("property::maximized", remove_wibox)
     ---}}}
     -- Create rounded rectangle shape (in one line)
     local function rrect(radius)
