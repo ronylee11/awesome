@@ -11,6 +11,8 @@ local dpi = xresources.apply_dpi
 -- helper functions
 local helpers = require("helpers")
 
+F.bar = {}
+
 -- {{{ Wibar
 
 -- Keyboard map indicator and switcher
@@ -327,5 +329,12 @@ screen.connect_signal("request::desktop_decoration", function(s)
     s.mywibar3.y = s.geometry.y + dpi(15)
 
 end)
+
+F.bar.toggle = function(c)
+    c.screen.mywibox.visible = false
+    c.screen.mywibar.visible = not c.screen.mywibar.visible
+    c.screen.mywibar2.visible = not c.screen.mywibar2.visible
+    c.screen.mywibar3.visible = not c.screen.mywibar3.visible
+end 
 
 -- }}}

@@ -9,6 +9,7 @@ local volume = require "lib.volume"
 local brightness = require "lib.brightness"
 local naughty = require("naughty")
 local mousemenu = require("ui.popup.mousemenu")
+local calender = require("ui.popup.calender")
 
 -- {{{ Mouse bindings
 awful.mouse.append_global_mousebindings({
@@ -94,7 +95,9 @@ awful.keyboard.append_global_keybindings({
               {description = "train", group = "launcher"}),
     -- Spawn widget
     awful.key({ altkey }, "c", function() F.action.toggle() end, 
-              {description = "spawn widget", group = "launcher"}),
+              {description = "spawn action", group = "launcher"}),
+    awful.key({ altkey }, "q", function() F.calender.toggle() end, 
+              {description = "spawn calender", group = "launcher"}),
     -- Test
     awful.key({ altkey, "Shift" }, "x", function() naughty.notify({ title = "Achtung!", text = "You're idling You're idling You're idling You're idling You're idling You're idling You're idling You're idling", timeout = 0 }) end, 
               {description = "spawn widget", group = "launcher"}),
@@ -299,13 +302,7 @@ client.connect_signal("request::default_keybindings", function()
                   end,
                   {description = "toggle fullscreen", group = "client"}),
         -- Hide Top Bar
-        awful.key({ modkey }, "b",
-                  function(c)
-                      c.screen.mywibox.visible = false
-                      c.screen.mywibar.visible = not c.screen.mywibar.visible
-                      c.screen.mywibar2.visible = not c.screen.mywibar2.visible
-                      c.screen.mywibar3.visible = not c.screen.mywibar3.visible
-                  end,
+        awful.key({ modkey }, "b", function(c) F.bar.toggle(c) end,
                   { description = "toggle top bar", group = "client" }),
         -- Close Window
         awful.key({ modkey, "Shift"   }, "c", function (c) c:kill() end,

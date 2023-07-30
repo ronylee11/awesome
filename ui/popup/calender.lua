@@ -6,6 +6,8 @@ local styles = {}
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 
+F.calender = {}
+
 styles.month = {
     padding = 0,
 }
@@ -116,5 +118,7 @@ calendar_widget:buttons(gears.table.join(
 local function toggle()
     calendar.visible = not calendar.visible
 end
+
+F.calender.toggle = toggle
 
 return toggle
