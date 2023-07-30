@@ -220,6 +220,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
         width = s.geometry.width - dpi(30),
         shape = helpers.rrect(0),
         screen = s,
+        input_passthrough = true,
         widget = {
             shape = helpers.rrect(beautiful.border_radius),
             widget = wibox.container.background,
