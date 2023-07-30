@@ -46,6 +46,8 @@ altkey = "Mod1"
 
 F = {}
 
+require("autostart")
+
 require("ui/menu")
 require("ui/layout")
 require("ui/bar")
