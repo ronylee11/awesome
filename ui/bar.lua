@@ -325,9 +325,9 @@ screen.connect_signal("request::desktop_decoration", function(s)
     s.mywibar.x = s.geometry.x + dpi(15)
     s.mywibar.y = s.geometry.y + dpi(11)
     s.mywibar2.x = s.geometry.x + s.geometry.width/2 - s.mywibar2.width/2
-    s.mywibar2.y = s.geometry.y + dpi(11)
+    s.mywibar2.y = s.mywibar.y
     s.mywibar3.x = s.geometry.x + s.geometry.width - s.mywibar3.width - dpi(15)
-    s.mywibar3.y = s.geometry.y + dpi(11)
+    s.mywibar3.y = s.mywibar.y
 
 end)
 
