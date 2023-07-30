@@ -182,19 +182,20 @@ screen.connect_signal("request::desktop_decoration", function(s)
     end
 
     --{{{ Remove wibox on full screen
-    local function remove_wibox(c)
+    local function remove_wibar(c)
         if c.fullscreen or c.maximized then
             c.screen.mywibox.visible = false
-            c.screen.mywibox2.visible = false
-            c.screen.mywibox4.visible = false
+            c.screen.mywibar.visible = false
+            c.screen.mywibar2.visible = false
+            c.screen.mywibar3.visible = false
         else
-            c.screen.mywibox.visible = true
-            c.screen.mywibox2.visible = true
-            c.screen.mywibox4.visible = true
+            c.screen.mywibar.visible = true
+            c.screen.mywibar2.visible = true
+            c.screen.mywibar3.visible = true
         end
     end
 
-    client.connect_signal("property::fullscreen", remove_wibox)
+    client.connect_signal("property::fullscreen", remove_wibar)
     ---}}}
     -- Create rounded rectangle shape (in one line)
     local function rrect(radius)
@@ -205,117 +206,125 @@ screen.connect_signal("request::desktop_decoration", function(s)
 
     local wibar_border_radius = 20
 
-    -- Create the wibox
-    -- Left wibox
-    s.mywibox = awful.wibar {
+    -- Create the empty wibox
+    s.mywibox = awful.wibar ({
         type = "dock",
         ontop = true,
         stretch = false,
-        margins = {top = dpi(4)},
-        visible = true,
+        margins = dpi(4),
+        visible = false,
+        opacity = 0,
         height = dpi(38),
+        width = s.geometry.width - dpi(30),
+        shape = helpers.rrect(0),
+        screen = s,
+        widget = {
+            shape = helpers.rrect(beautiful.border_radius),
+            widget = wibox.container.background,
+        }
+    })
+
+
+    -- Left wibox
+    s.mywibar = awful.popup {
+        type = "dock",
+        ontop = true,
+        stretch = false,
+        margins = {top = dpi(4), bottom = dpi(4)},
+        visible = true,
         width    = dpi(110),
         shape = rrect(wibar_border_radius),
         screen   = s,
+        widget = {
+            {
+                {
+                    layout = wibox.layout.align.horizontal,
+                    time,
+                },
+                left = dpi(15),
+                right = dpi(15),
+                widget = wibox.container.margin,
+            },
+            forced_height = dpi(38),
+            shape = rrect(beautiful.border_radius),
+            widget = wibox.container.background,
+        }
     }
 
+
     -- Middle wibox
-    s.mywibox2 = awful.wibar {
+    s.mywibar2 = awful.popup {
         type = "dock",
         ontop = true,
         stretch = false,
         margins = {top = dpi(4)},
         top = dpi(4),
         visible = true,
-        height = dpi(38),
         width    = dpi(462),
         --width = s.geometry.width - dpi(30),
         shape = rrect(wibar_border_radius),
         screen = s,
+        widget = {
+                {
+                    {
+                        layout = wibox.layout.align.horizontal,
+                        { -- Left widgets
+                        layout = wibox.layout.fixed.horizontal,
+                        {
+                            s.mytaglist,
+                            margins = dpi(2),
+                            widget = wibox.container.margin,
+                        },
+                    },
+                },
+                left = dpi(15),
+                right = dpi(15),
+                widget = wibox.container.margin,
+            },
+            forced_height = dpi(38),
+            shape = rrect(beautiful.border_radius),
+            widget = wibox.container.background,
+        }
     }
 
-    --s.mywibox3 = awful.wibar {
-        --type = "dock",
-        --ontop = true,
-        --stretch = false,
-        --margins = dpi(4),
-        --visible = true,
-        --height = dpi(38),
-        --width    = 80,
-        --shape = rrect(0),
-        --screen   = s,
-    --}
-
     -- Right wibox
-    s.mywibox4 = awful.wibar {
+    s.mywibar3 = awful.popup {
         type = "dock",
         ontop = true,
         stretch = false,
         margins = {top = dpi(4)},
         top = dpi(4),
         visible = true,
-        height = dpi(38),
         width    = dpi(265),
         shape = rrect(wibar_border_radius),
         screen = s,
-    }
-
-    s.mywibox.x = s.geometry.x + dpi(15)
-    s.mywibox4.x = s.geometry.x + s.geometry.width - s.mywibox4.width - dpi(15)
-
-    s.mywibox:setup({
-        {
-            {
-                layout = wibox.layout.align.horizontal,
-                time,
-            },
-            left = dpi(15),
-            right = dpi(15),
-            widget = wibox.container.margin,
-        },
-        shape = rrect(beautiful.border_radius),
-        widget = wibox.container.background,
-    })
-
-    s.mywibox2:setup({
-        {
-            {
-                layout = wibox.layout.align.horizontal,
-                { -- Left widgets
-                layout = wibox.layout.fixed.horizontal,
+        widget = {
+                {
                     {
-                        s.mytaglist,
-                        margins = dpi(2),
-                        widget = wibox.container.margin,
+                        layout = wibox.layout.align.horizontal,
+                        { -- Right widgets
+                        layout = wibox.layout.fixed.horizontal,
+                        mytextclock,
+                        battery_widget,
+                        action_icon,
                     },
                 },
+                left = dpi(15),
+                right = dpi(15),
+                widget = wibox.container.margin,
             },
-            left = dpi(15),
-            right = dpi(15),
-            widget = wibox.container.margin,
-        },
-        shape = rrect(beautiful.border_radius),
-        widget = wibox.container.background,
-    })
+            forced_height = dpi(38),
+            shape = rrect(beautiful.border_radius),
+            widget = wibox.container.background,
+        }
+    }
 
-    s.mywibox4:setup({
-        {
-            {
-                layout = wibox.layout.align.horizontal,
-                { -- Right widgets
-                layout = wibox.layout.fixed.horizontal,
-                mytextclock,
-                battery_widget,
-                action_icon,
-                },
-            },
-            left = dpi(15),
-            right = dpi(15),
-            widget = wibox.container.margin,
-        },
-        shape = rrect(beautiful.border_radius),
-        widget = wibox.container.background,
-    })
+    s.mywibar.x = s.geometry.x + dpi(15)
+    s.mywibar.y = s.geometry.y + dpi(15)
+    s.mywibar2.x = s.geometry.x + s.geometry.width/2 - s.mywibar2.width/2
+    s.mywibar2.y = s.geometry.y + dpi(15)
+    s.mywibar3.x = s.geometry.x + s.geometry.width - s.mywibar3.width - dpi(15)
+    s.mywibar3.y = s.geometry.y + dpi(15)
 
 end)
 

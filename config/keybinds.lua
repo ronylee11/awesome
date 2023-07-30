@@ -171,9 +171,23 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey, "Control" }, "h", function() awful.tag.incncol(-1, nil, true) end,
               {description = "decrease the number of columns", group = "layout"}),
     -- Change Layout
-    awful.key({ modkey }, "space", function() awful.layout.inc(1) end,
+    awful.key({ modkey }, "space", 
+              function() 
+                  awful.layout.inc(1) 
+                  awful.screen.focused().mywibox.visible = true
+                  awful.screen.focused().mywibar.visible = true
+                  awful.screen.focused().mywibar2.visible = true
+                  awful.screen.focused().mywibar3.visible = true
+              end,
               {description = "select next", group = "layout"}),
-    awful.key({ modkey, "Shift" }, "space", function() awful.layout.inc(-1) end,
+    awful.key({ modkey, "Shift" }, "space", 
+              function() 
+                  awful.layout.inc(-1) 
+                  awful.screen.focused().mywibox.visible = true
+                  awful.screen.focused().mywibar.visible = true
+                  awful.screen.focused().mywibar2.visible = true
+                  awful.screen.focused().mywibar3.visible = true
+             end,
               {description = "select previous", group = "layout"}),
 })
 
@@ -287,9 +301,10 @@ client.connect_signal("request::default_keybindings", function()
         -- Hide Top Bar
         awful.key({ modkey }, "b",
                   function(c)
-                      c.screen.mywibox.visible = not c.screen.mywibox.visible
-                      c.screen.mywibox2.visible = not c.screen.mywibox2.visible
-                      c.screen.mywibox4.visible = not c.screen.mywibox4.visible
+                      c.screen.mywibox.visible = false
+                      c.screen.mywibar.visible = not c.screen.mywibar.visible
+                      c.screen.mywibar2.visible = not c.screen.mywibar2.visible
+                      c.screen.mywibar3.visible = not c.screen.mywibar3.visible
                   end,
                   { description = "toggle top bar", group = "client" }),
         -- Close Window
