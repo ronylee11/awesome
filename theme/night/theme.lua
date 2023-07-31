@@ -37,8 +37,8 @@ theme.transparent = "#00000000"
 
 theme.font = "Wavy, Bold 11"
 theme.font_name = "Wavy"
-theme.icon_font = "Wavy"
-theme.icon_font2 = "Wavy"
+theme.icon_font = "Iosevka Nerd Font"
+theme.icon_font2 = "Iosevka Nerd Font"
 
 theme.bg = "#17171C"
 theme.bg_normal   = "#061115"
