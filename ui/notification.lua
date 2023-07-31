@@ -32,7 +32,7 @@ naughty.config.presets.low.timeout = 3
 naughty.config.presets.critical.timeout = 0
 
 naughty.config.presets.normal = {
-    font = beautiful.font,
+    font = beautiful.font_name .. "11",
     fg = beautiful.fg_normal,
     bg = beautiful.bg_normal,
 }
@@ -133,7 +133,7 @@ naughty.connect_signal("request::display", function(n)
                 "<span weight='normal'>" .. n.message .. "</span>",
                 beautiful.fg_normal .. "BF"
                 ),
-                font = beautiful.font,
+                font = beautiful.font_name .. ", Bold 11",
                 align = "left",
                 valign = "center",
                 wrap = "char",
