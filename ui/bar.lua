@@ -251,7 +251,11 @@ screen.connect_signal("request::desktop_decoration", function(s)
             forced_height = dpi(38),
             shape = rrect(beautiful.border_radius),
             widget = wibox.container.background,
-        }
+        },
+        placement = function(c)
+            (awful.placement.top_left)(c, { margins = { top = dpi(15), left = dpi(15) } })
+        end
+
     }
 
 
@@ -287,7 +291,11 @@ screen.connect_signal("request::desktop_decoration", function(s)
             forced_height = dpi(38),
             shape = rrect(beautiful.border_radius),
             widget = wibox.container.background,
-        }
+        },
+        placement = function(c)
+            (awful.placement.top)(c, { margins = { top = dpi(15) } })
+        end
+
     }
 
     -- Right wibox
@@ -319,16 +327,11 @@ screen.connect_signal("request::desktop_decoration", function(s)
             forced_height = dpi(38),
             shape = rrect(beautiful.border_radius),
             widget = wibox.container.background,
-        }
+        },
+        placement = function(c)
+            (awful.placement.top_right)(c, { margins = { top = dpi(15), right = dpi(15) } })
+        end
     }
-
-    s.mywibar.x = s.geometry.x + dpi(15)
-    s.mywibar.y = s.geometry.y + dpi(11)
-    s.mywibar2.x = s.geometry.x + s.geometry.width/2 - s.mywibar2.width/2
-    s.mywibar2.y = s.mywibar.y
-    s.mywibar3.x = s.geometry.x + s.geometry.width - s.mywibar3.width - dpi(15)
-    s.mywibar3.y = s.mywibar.y
-
 end)
 
 F.bar.toggle = function(c)
