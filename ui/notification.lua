@@ -112,7 +112,7 @@ naughty.connect_signal("request::display", function(n)
         {
             {
                 markup = n.title,
-                font = beautiful.font_name .. "Bold 13",
+                font = beautiful.font_name .. ", Bold 13",
                 align = "left",
                 valign = "center",
                 widget = wibox.widget.textbox,
@@ -133,7 +133,7 @@ naughty.connect_signal("request::display", function(n)
                 "<span weight='normal'>" .. n.message .. "</span>",
                 beautiful.fg_normal .. "BF"
                 ),
-                font = beautiful.font_name .. "Bold 11",
+                font = beautiful.font,
                 align = "left",
                 valign = "center",
                 wrap = "char",
