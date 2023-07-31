@@ -98,8 +98,8 @@ awful.keyboard.append_global_keybindings({
               {description = "spawn action", group = "launcher"}),
     awful.key({ altkey }, "q", function() F.calender.toggle() end, 
               {description = "spawn calender", group = "launcher"}),
-    -- Test
-    awful.key({ altkey, "Shift" }, "x", function() naughty.notify({ title = "Achtung!", text = "You're idling You're idling You're idling You're idling You're idling You're idling You're idling You're idling", timeout = 0 }) end, 
+    -- Test Notification
+    awful.key({ altkey, "Shift" }, "x", function() naughty.notify({ app_name = "Master Ouch", title = "Achtung!", text = "You're idling You're idling You're idling You're idling You're idling You're idling You're idling You're idling", icon = gears.filesystem.get_configuration_dir() .. "/misc/yawn.png", timeout = 3 }) end, 
               {description = "spawn widget", group = "launcher"}),
 })
 
