@@ -35,7 +35,7 @@ local time = wibox.widget({
         widget = wibox.container.margin,
         margins = 10,
         {
-            widget = wibox.widget.textclock("%a %B %d %l:%M:%S %p", 1),
+            widget = wibox.widget.textclock("%A, %B %d   %l:%M:%S %p", 1),
             font = beautiful.font_name .. ", Bold 15",
             align = "center",
         },
@@ -55,7 +55,7 @@ local action_icon = require("ui.gooey").make_button({
 })
 
 -- Battery
-battery = require("config.battery")
+battery = require("ui.widgets.battery")
 
 battery_widget = wibox.widget.textbox()
 battery_widget:set_align("right")
