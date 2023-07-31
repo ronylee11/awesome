@@ -5,6 +5,7 @@ local dpi = xresources.apply_dpi
 local gears = require("gears")
 local gfs = require("gears.filesystem")
 local themes_path = gfs.get_themes_dir()
+local recolor_image = require("gears.color").recolor_image
 
 local theme = {}
 
@@ -96,60 +97,67 @@ theme.menu_border_width         = dpi(2)
 theme.menu_border_color         = theme.bg_focus
 
 -- power
-theme.lock_icon         = theme.confdir .. "/power/lock.svg"
-theme.logout_icon       = theme.confdir .. "/power/logout.svg"
-theme.sleep_icon        = theme.confdir .. "/power/sleep.svg"
-theme.restart_icon      = theme.confdir .. "/power/restart.svg"
-theme.shutdown_icon     = theme.confdir .. "/power/shutdown.svg"
+theme.lock_icon         = recolor_image(theme.confdir .. "/power/lock.svg",            theme.fg_normal)
+theme.logout_icon       = recolor_image(theme.confdir .. "/power/logout.svg",          theme.fg_normal)
+theme.sleep_icon        = recolor_image(theme.confdir .. "/power/sleep.svg",           theme.fg_normal)
+theme.restart_icon      = recolor_image(theme.confdir .. "/power/restart.svg",         theme.fg_normal)
+theme.shutdown_icon     = recolor_image(theme.confdir .. "/power/shutdown.svg",        theme.fg_normal)
 
 -- tag
-theme.terminal_icon     = theme.confdir .. "/tag/terminal.svg"
-theme.code_icon         = theme.confdir .. "/tag/code.svg"
-theme.chrome_icon       = theme.confdir .. "/tag/chrome.svg"
-theme.files_icon        = theme.confdir .. "/tag/files.svg"
-theme.document_icon     = theme.confdir .. "/tag/document.svg"
-theme.media_icon        = theme.confdir .. "/tag/media.svg"
-theme.tools_icon        = theme.confdir .. "/tag/tools.svg"
-theme.chat_icon         = theme.confdir .. "/tag/chat.svg"
-theme.game_icon         = theme.confdir .. "/tag/game.svg"
-theme.general_icon      = theme.confdir .. "/tag/general.svg"
+theme.terminal_icon     = recolor_image(theme.confdir .. "/tag/terminal.svg",         theme.fg_normal)
+theme.code_icon         = recolor_image(theme.confdir .. "/tag/code.svg",             theme.fg_normal)
+theme.chrome_icon       = recolor_image(theme.confdir .. "/tag/chrome.svg",           theme.fg_normal)
+theme.files_icon        = recolor_image(theme.confdir .. "/tag/files.svg",            theme.fg_normal)
+theme.document_icon     = recolor_image(theme.confdir .. "/tag/document.svg",         theme.fg_normal)
+theme.media_icon        = recolor_image(theme.confdir .. "/tag/media.svg",            theme.fg_normal)
+theme.tools_icon        = recolor_image(theme.confdir .. "/tag/tools.svg",            theme.fg_normal)
+theme.chat_icon         = recolor_image(theme.confdir .. "/tag/chat.svg",             theme.fg_normal)
+theme.game_icon         = recolor_image(theme.confdir .. "/tag/game.svg",             theme.fg_normal)
+theme.general_icon      = recolor_image(theme.confdir .. "/tag/general.svg",          theme.fg_normal)
+
+-- player
+theme.previous_icon     = recolor_image(theme.confdir .. "/player/previous.svg",       theme.fg_normal)
+theme.play_icon         = recolor_image(theme.confdir .. "/player/play.svg",           theme.fg_normal)
+theme.stop_icon         = recolor_image(theme.confdir .. "/player/stop.svg",           theme.fg_normal)
+theme.pause_icon        = recolor_image(theme.confdir .. "/player/pause.svg",          theme.fg_normal)
+theme.next_icon         = recolor_image(theme.confdir .. "/player/next.svg",           theme.fg_normal)
 
 -- arrow
-theme.arrow_down_icon   = theme.confdir .. "/other/arrow_down.svg"
-theme.arrow_up_icon     = theme.confdir .. "/other/arrow_up.svg"
-theme.arrow_right_icon  = theme.confdir .. "/other/arrow_right.svg"
-theme.arrow_left_icon   = theme.confdir .. "/other/arrow_left.svg"
+theme.arrow_down_icon   = recolor_image(theme.confdir .. "/other/arrow_down.svg",      theme.fg_normal)
+theme.arrow_up_icon     = recolor_image(theme.confdir .. "/other/arrow_up.svg",        theme.fg_normal)
+theme.arrow_right_icon  = recolor_image(theme.confdir .. "/other/arrow_right.svg",     theme.fg_normal)
+theme.arrow_left_icon   = recolor_image(theme.confdir .. "/other/arrow_left.svg",      theme.fg_normal)
 
 -- other icon
-theme.menu_submenu_icon = theme.confdir .. "/other/submenu.svg"
-theme.notification_icon = theme.confdir .. "/other/notification.svg"
-theme.setting_icon      = theme.confdir .. "/other/setting.svg"
-theme.refresh_icon      = theme.confdir .. "/other/refresh.svg"
-theme.book_icon         = theme.confdir .. "/other/book.svg"
-theme.keyboard_icon     = theme.confdir .. "/other/keyboard.svg"
-theme.awesome_icon      = theme.confdir .. "/other/awesomewm.svg"
-theme.os_icon           = theme.confdir .. "/other/archlinux.svg"
-theme.dashboard_icon    = theme.confdir .. "/other/dashboard.svg"
-theme.menu_icon         = theme.confdir .. "/other/menu.svg"
-theme.bin_icon          = theme.confdir .. "/other/bin.svg"
-theme.image_icon        = theme.confdir .. "/other/image.svg"
-theme.camera_icon       = theme.confdir .. "/other/camera.svg"
+theme.menu_submenu_icon = recolor_image(theme.confdir .. "/other/submenu.svg",         theme.fg_normal)
+theme.notification_icon = recolor_image(theme.confdir .. "/other/notification.svg",    theme.fg_normal)
+theme.setting_icon      = recolor_image(theme.confdir .. "/other/setting.svg",         theme.fg_normal)
+theme.refresh_icon      = recolor_image(theme.confdir .. "/other/refresh.svg",         theme.fg_normal)
+theme.book_icon         = recolor_image(theme.confdir .. "/other/book.svg",            theme.fg_normal)
+theme.keyboard_icon     = recolor_image(theme.confdir .. "/other/keyboard.svg",        theme.fg_normal)
+theme.awesome_icon      = recolor_image(theme.confdir .. "/other/awesomewm.svg",       theme.bg_normal)
+theme.os_icon           = recolor_image(theme.confdir .. "/other/archlinux.svg",       theme.fg_normal)
+theme.dashboard_icon    = recolor_image(theme.confdir .. "/other/dashboard.svg",       theme.fg_normal)
+theme.menu_icon         = recolor_image(theme.confdir .. "/other/menu.svg",            theme.fg_normal)
+theme.bin_icon          = recolor_image(theme.confdir .. "/other/bin.svg",             theme.fg_normal)
+theme.image_icon        = recolor_image(theme.confdir .. "/other/image.svg",           theme.green)
+theme.camera_icon       = recolor_image(theme.confdir .. "/other/camera.svg",          theme.blue)
 
-theme.download_icon     = theme.confdir .. "/other/download.svg"
-theme.upload_icon       = theme.confdir .. "/other/upload.svg"
-theme.hard_drive_icon   = theme.confdir .. "/other/hard_drive.svg"
-theme.temperature_icon  = theme.confdir .. "/other/temperature.svg"
-theme.gpu_icon          = theme.confdir .. "/other/gpu.svg"
-theme.memory_icon       = theme.confdir .. "/other/memory.svg"
-theme.cpu_icon          = theme.confdir .. "/other/cpu.svg"
-theme.clock_icon        = theme.confdir .. "/other/clock.svg"
-theme.volume_icon       = theme.confdir .. "/other/volume.svg"
-theme.volume_mute_icon  = theme.confdir .. "/other/volume_mute.svg"
-theme.mic_icon          = theme.confdir .. "/other/mic.svg"
-theme.mic_off_icon      = theme.confdir .. "/other/mic_off.svg"
+theme.download_icon     = recolor_image(theme.confdir .. "/other/download.svg",        theme.white)
+theme.upload_icon       = recolor_image(theme.confdir .. "/other/upload.svg",          theme.white)
+theme.hard_drive_icon   = recolor_image(theme.confdir .. "/other/hard_drive.svg",      theme.blue)
+theme.temperature_icon  = recolor_image(theme.confdir .. "/other/temperature.svg",     theme.magenta)
+theme.gpu_icon          = recolor_image(theme.confdir .. "/other/gpu.svg",             theme.green)
+theme.memory_icon       = recolor_image(theme.confdir .. "/other/memory.svg",          theme.cyan)
+theme.cpu_icon          = recolor_image(theme.confdir .. "/other/cpu.svg",             theme.magenta)
+theme.clock_icon        = recolor_image(theme.confdir .. "/other/clock.svg",           theme.green)
+theme.volume_icon       = recolor_image(theme.confdir .. "/other/volume.svg",          theme.blue)
+theme.volume_mute_icon  = recolor_image(theme.confdir .. "/other/volume_mute.svg",     theme.fg_normal)
+theme.mic_icon          = recolor_image(theme.confdir .. "/other/mic.svg",             theme.cyan)
+theme.mic_off_icon      = recolor_image(theme.confdir .. "/other/mic_off.svg",         theme.fg_normal)
 
-theme.add_icon          = theme.confdir .. "/other/add.svg"
-theme.subtract_icon     = theme.confdir .. "/other/subtract.svg"
+theme.add_icon          = recolor_image(theme.confdir .. "/other/add.svg",             theme.fg_normal)
+theme.subtract_icon     = recolor_image(theme.confdir .. "/other/subtract.svg",        theme.fg_normal)
 
 -- color icon
 theme.package_icon      = theme.confdir .. "/other/package.svg"
