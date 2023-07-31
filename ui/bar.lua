@@ -10,6 +10,7 @@ local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 -- helper functions
 local helpers = require("helpers")
+local naughty = require("naughty")
 
 F.bar = {}
 
@@ -53,6 +54,31 @@ local action_icon = require("ui.gooey").make_button({
     end,
 })
 
+F.bar.page1 = beautiful.taglist_fg_focus
+F.bar.page2 = beautiful.fg_minimize
+
+-- Create a pages widget
+local pages = wibox.widget({
+    widget = wibox.container.background,
+    bg = beautiful.bg_normal,
+    {
+        {
+            markup = helpers.colorize_text("1", F.bar.page1),
+            font = beautiful.font_name .. ", Bold 15",
+            widget = wibox.widget.textbox,
+        },
+        {
+            markup = helpers.colorize_text("2", F.bar.page2),
+            font = beautiful.font_name .. ", Bold 15",
+            widget = wibox.widget.textbox,
+        },
+        spacing = dpi(15),
+        widget = wibox.layout.flex.horizontal,
+    },
+})
+
+
+
 -- Battery
 battery = require("config.battery")
 
@@ -94,7 +120,16 @@ screen.connect_signal("request::desktop_decoration", function(s)
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
         screen  = s,
-        filter = function(c) return c.index < 6 end,
+        filter = 
+            -- checks if current focused tag index is < 6, if so, change the filter to only show clients with index < 6
+            -- if not, change the filter to only show clients with index > 5
+            function(c)
+                if tonumber(awful.screen.focused().selected_tag.index) < 6 then
+                    return c.index < 6
+                else
+                    return c.index > 5
+                end
+            end,
         widget_template = {
             {
                 {
@@ -144,78 +179,19 @@ screen.connect_signal("request::desktop_decoration", function(s)
 
                     if self.has_backup then self.bg = self.backup end
                 end)
-            end,
-            update_callback = function(self, c3, index, objects) --luacheck: no unused args
-                self:get_children_by_id('index_role')[1].markup = '<b> '..index..' </b>'
-            end,
-        },
-        buttons = {
-            awful.button({ }, 1, function(t) t:view_only() end),
-            awful.button({ modkey }, 1, function(t)
-                                            if client.focus then
-                                                client.focus:move_to_tag(t)
-                                            end
-                                        end),
-            awful.button({ }, 3, awful.tag.viewtoggle),
-            awful.button({ modkey }, 3, function(t)
-                                            if client.focus then
-                                                client.focus:toggle_tag(t)
-                                            end
-                                        end),
-        }
-    }
 
-    s.mytaglist2 = awful.widget.taglist {
-        screen  = s,
-        filter = function(c) return c.index > 5 end,
-        widget_template = {
-            {
-                {
-                    {
-                        id     = 'index_role',
-                        widget = wibox.widget.textbox,
-                        visible = false,
-                    },
-                    {
-                        id     = 'text_role',
-                        widget = wibox.widget.textbox,
-                    },
-                    spacing = dpi(7),
-                    layout = wibox.layout.fixed.horizontal,
-                },
-                left = dpi(0),
-                right = dpi(0),
-                widget = wibox.container.margin,
-            },
-            id     = 'background_role',
-            widget = wibox.container.background,
-            --shape = helpers.rrect(10),
-            -- Add support for hover colors and an index label
-            create_callback = function(self, c3, index, objects) --luacheck: no unused args
-                self:get_children_by_id('index_role')[1].markup = '<b> '..index..' </b>'
-                self:connect_signal('mouse::enter', function()
-
-                    -- BLING: Only show widget when there are clients in the tag
-                    if #c3:clients() > 0 then
-                        -- BLING: Update the widget with the new tag
-                        awesome.emit_signal("bling::tag_preview::update", c3)
-                        -- BLING: Show the widget
-                        awesome.emit_signal("bling::tag_preview::visibility", s, true)
+                -- checks if current tag index is < 6, if so, change the filter to only show clients with index < 6
+                -- if not, change the filter to only show clients with index > 5
+                self:connect_signal('property::selected', function()
+                    if c3.index < 6 then
+                        self.filter = function(c3)
+                            return c3.index < 6
+                        end
+                    else
+                        self.filter = function(c3)
+                            return c3.index > 5
+                        end
                     end
-
-                    if self.bg ~= beautiful.bg_focus then
-                        self.backup     = self.bg
-                        self.has_backup = true
-                    end
-                    self.bg = beautiful.bg_focus
-                    self.shape = helpers.rrect(10)
-                end)
-                self:connect_signal('mouse::leave', function()
-
-                    -- BLING: Turn the widget off
-                    awesome.emit_signal("bling::tag_preview::visibility", s, false)
-
-                    if self.has_backup then self.bg = self.backup end
                 end)
             end,
             update_callback = function(self, c3, index, objects) --luacheck: no unused args
@@ -272,12 +248,6 @@ screen.connect_signal("request::desktop_decoration", function(s)
 
     client.connect_signal("property::fullscreen", remove_wibar)
     ---}}}
-    -- Create rounded rectangle shape (in one line)
-    local function rrect(radius)
-        return function(cr, width, height)
-            gears.shape.rounded_rect(cr, width, height, radius)
-        end
-    end
 
     local wibar_border_radius = 20
 
@@ -300,7 +270,6 @@ screen.connect_signal("request::desktop_decoration", function(s)
         }
     })
 
-
     -- Left wibox
     s.mywibar = awful.popup {
         type = "dock",
@@ -309,25 +278,12 @@ screen.connect_signal("request::desktop_decoration", function(s)
         margins = {top = dpi(4), bottom = dpi(4)},
         visible = true,
         width   = dpi(110),
-        shape = rrect(wibar_border_radius),
+        shape = helpers.rrect(wibar_border_radius),
         screen   = s,
         widget = 
         {
             {
-                {
-                    {
-                        markup = helpers.colorize_text("1", beautiful.fg_minimize),
-                        font = beautiful.font_name .. ", Bold 15",
-                        widget = wibox.widget.textbox,
-                    },
-                    {
-                        markup = helpers.colorize_text("2", beautiful.fg_minimize),
-                        font = beautiful.font_name .. ", Bold 15",
-                        widget = wibox.widget.textbox,
-                    },
-                    spacing = dpi(15),
-                    widget = wibox.layout.flex.horizontal,
-                },
+                pages,
                 left = dpi(30),
                 right = dpi(30),
                 top = dpi(4),
@@ -335,7 +291,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
             },
             forced_height = dpi(38),
             forced_width = dpi(110),
-            shape = rrect(beautiful.border_radius),
+            shape = helpers.rrect(beautiful.border_radius),
             widget = wibox.container.background,
         },
         placement = function(c)
@@ -343,7 +299,6 @@ screen.connect_signal("request::desktop_decoration", function(s)
         end
 
     }
-
 
     -- Middle wibox
     s.mywibar2 = awful.popup {
@@ -355,7 +310,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
         visible = true,
         width    = dpi(462),
         --width = s.geometry.width - dpi(30),
-        shape = rrect(wibar_border_radius),
+        shape = helpers.rrect(wibar_border_radius),
         screen = s,
         widget = {
                 {
@@ -363,9 +318,9 @@ screen.connect_signal("request::desktop_decoration", function(s)
                     layout = wibox.layout.fixed.horizontal,
                     {
                         {
+                            --spawnTaglist(),
                             s.mytaglist,
-                            s.mytaglist2,
-                            visible = true,
+                            --s.mytaglist2,
                             layout = wibox.layout.fixed.horizontal,
                         },
                         margins = dpi(2),
@@ -377,7 +332,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
                 widget = wibox.container.margin,
             },
             forced_height = dpi(38),
-            shape = rrect(beautiful.border_radius),
+            shape = helpers.rrect(beautiful.border_radius),
             widget = wibox.container.background,
         },
         placement = function(c)
@@ -395,7 +350,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
         top = dpi(4),
         visible = true,
         width    = dpi(265),
-        shape = rrect(wibar_border_radius),
+        shape = helpers.rrect(wibar_border_radius),
         screen = s,
         widget = {
                 {
@@ -413,7 +368,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
                 widget = wibox.container.margin,
             },
             forced_height = dpi(38),
-            shape = rrect(beautiful.border_radius),
+            shape = helpers.rrect(beautiful.border_radius),
             widget = wibox.container.background,
         },
         placement = function(c)
