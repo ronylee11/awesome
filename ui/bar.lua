@@ -54,31 +54,6 @@ local action_icon = require("ui.gooey").make_button({
     end,
 })
 
-F.bar.page1 = beautiful.taglist_fg_focus
-F.bar.page2 = beautiful.fg_minimize
-
--- Create a pages widget
-local pages = wibox.widget({
-    widget = wibox.container.background,
-    bg = beautiful.bg_normal,
-    {
-        {
-            markup = helpers.colorize_text("1", F.bar.page1),
-            font = beautiful.font_name .. ", Bold 15",
-            widget = wibox.widget.textbox,
-        },
-        {
-            markup = helpers.colorize_text("2", F.bar.page2),
-            font = beautiful.font_name .. ", Bold 15",
-            widget = wibox.widget.textbox,
-        },
-        spacing = dpi(15),
-        widget = wibox.layout.flex.horizontal,
-    },
-})
-
-
-
 -- Battery
 battery = require("config.battery")
 
@@ -117,6 +92,52 @@ screen.connect_signal("request::desktop_decoration", function(s)
         }
     }
 
+    F.bar.page1 = beautiful.taglist_fg_focus
+    F.bar.page2 = beautiful.fg_minimize
+
+    function updatePage() 
+        -- checks if current focused tag index is < 6, if so, change F.bar.page1 to taglist_fg_focus, F.bar.page2 to fg_minimize
+        -- if not, change F.bar.page2 to taglist_fg_focus, F.bar.page1 to fg_minimize 
+        -- update the markup of page1 and page2
+        if awful.screen.focused().selected_tag.index < 6 then
+            F.bar.page1 = beautiful.taglist_fg_focus
+            F.bar.page2 = beautiful.fg_minimize
+            page1.markup = helpers.colorize_text("1", F.bar.page1)
+            page2.markup = helpers.colorize_text("2", F.bar.page2)
+        else
+            F.bar.page2 = beautiful.taglist_fg_focus
+            F.bar.page1 = beautiful.fg_minimize
+            page1.markup = helpers.colorize_text("1", F.bar.page1)
+            page2.markup = helpers.colorize_text("2", F.bar.page2)
+        end
+    end
+
+    -- Create a pages widget
+    page1 = wibox.widget({
+        markup = helpers.colorize_text("1", F.bar.page1),
+        font = beautiful.font_name .. ", Bold 15",
+        widget = wibox.widget.textbox,
+    })
+    page2 = wibox.widget({
+        markup = helpers.colorize_text("2", F.bar.page2),
+        font = beautiful.font_name .. ", Bold 15",
+        widget = wibox.widget.textbox,
+    })
+    s.pages = wibox.widget({
+        widget = wibox.container.background,
+        bg = beautiful.bg_normal,
+        {
+            page1,
+            page2,
+            spacing = dpi(15),
+            widget = wibox.layout.flex.horizontal,
+        },
+    })
+
+    updatePage()
+    page1:connect_signal("widget::redraw_needed", updatePage)
+    page2:connect_signal("widget::redraw_needed", updatePage)
+
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
         screen  = s,
@@ -125,8 +146,12 @@ screen.connect_signal("request::desktop_decoration", function(s)
             -- if not, change the filter to only show clients with index > 5
             function(c)
                 if tonumber(awful.screen.focused().selected_tag.index) < 6 then
+                    page1:emit_signal("widget::redraw_needed")
+                    page2:emit_signal("widget::redraw_needed")
                     return c.index < 6
                 else
+                    page1:emit_signal("widget::redraw_needed")
+                    page2:emit_signal("widget::redraw_needed")
                     return c.index > 5
                 end
             end,
@@ -178,20 +203,6 @@ screen.connect_signal("request::desktop_decoration", function(s)
                     awesome.emit_signal("bling::tag_preview::visibility", s, false)
 
                     if self.has_backup then self.bg = self.backup end
-                end)
-
-                -- checks if current tag index is < 6, if so, change the filter to only show clients with index < 6
-                -- if not, change the filter to only show clients with index > 5
-                self:connect_signal('property::selected', function()
-                    if c3.index < 6 then
-                        self.filter = function(c3)
-                            return c3.index < 6
-                        end
-                    else
-                        self.filter = function(c3)
-                            return c3.index > 5
-                        end
-                    end
                 end)
             end,
             update_callback = function(self, c3, index, objects) --luacheck: no unused args
@@ -283,7 +294,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
         widget = 
         {
             {
-                pages,
+                s.pages,
                 left = dpi(30),
                 right = dpi(30),
                 top = dpi(4),
@@ -297,7 +308,6 @@ screen.connect_signal("request::desktop_decoration", function(s)
         placement = function(c)
             (awful.placement.top_left)(c, { margins = { top = dpi(15), left = dpi(15) } })
         end
-
     }
 
     -- Middle wibox
@@ -338,7 +348,6 @@ screen.connect_signal("request::desktop_decoration", function(s)
         placement = function(c)
             (awful.placement.top)(c, { margins = { top = dpi(15) } })
         end
-
     }
 
     -- Right wibox
