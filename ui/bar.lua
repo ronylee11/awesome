@@ -35,7 +35,7 @@ local time = wibox.widget({
         widget = wibox.container.margin,
         margins = 10,
         {
-            widget = wibox.widget.textclock("%a %b %d %l:%M %p"),
+            widget = wibox.widget.textclock("%a %B %d %l:%M:%S %p", 1),
             font = beautiful.font_name .. ", Bold 15",
             align = "center",
         },
