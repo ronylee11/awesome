@@ -4,15 +4,23 @@ My AwesomeWM Build with designs based on personal preferences aka. my ULTIMATE b
 This is a unique design of window manager that will have 10 tags <br/>
 with first 5 tags showing as page 1, another 5 tags showing as page 2
 
-# Demo
+# Intro
 
+quick demo of the setup
 ![Demo](./.github/demo.gif)
+Whats the special sauce for this rice you might ask? <br/>
+...
+
+HAH!!! <br/>
+surprise surprise! I actually made my own handwritten fonts for the bar and widgets <br/>
+such wonderful sharp eyes of urs to notice my neat, creative, wonderfully fitted handwritings aye? 😎
 
 # Design
 
 My Designs on Paper <br/>
 Design of bar (done)
 ![Design of bar](./.github/design.png)
+
 Design of titlebar on file browser (abandoned, looks kinda ugly in hindsight lol)
 ![Design of titlebar](./.github/booklet.png)
 
@@ -86,4 +94,4 @@ Fabrizio Conti - [mountains under blue and grey sky](https://unsplash.com/photos
 Rofi config: <br/>
 adi1090x - [https://github.com/adi1090x/rofi](https://github.com/adi1090x/rofi)
 
-Big thanks to these pioneers!
+Big thanks to these precious souls!
