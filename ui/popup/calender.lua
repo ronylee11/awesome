@@ -15,7 +15,7 @@ styles.month = {
 styles.normal = {
     fg_color = beautiful.fg_dark,
     markup = function(t)
-        return "<span font_desc='" .. beautiful.font_name .. " Bold 10" .. "'>" .. t .. "</span>"
+        return "<span font_desc='" .. beautiful.font_name .. " Bold 13" .. "'>" .. t .. "</span>"
     end,
 }
 
@@ -23,20 +23,20 @@ styles.focus = {
     fg_color = beautiful.yellow,
     bg_color = beautiful.bg,
     markup = function(t)
-        return "<span font_desc='" .. beautiful.font_name .. " Bold 10" .. "'>" .. t .. "</span>"
+        return "<span font_desc='" .. beautiful.font_name .. " Bold 13" .. "'>" .. t .. "</span>"
     end,
     padding = 5,
 }
 
 styles.header = {
     markup = function(t)
-        return "<span font_desc='" .. beautiful.font_name .. " Bold 13" .. "'>" .. t .. "</span>"
+        return "<span font_desc='" .. beautiful.font_name .. " Bold 15" .. "'>" .. t .. "</span>"
     end,
 }
 styles.weekday = {
     fg_color = beautiful.fg_dark,
     markup = function(t)
-        return "<span font_desc='" .. beautiful.font_name .. " Bold 10" .. "'>" .. t .. "</span>"
+        return "<span font_desc='" .. beautiful.font_name .. " Bold 13" .. "'>" .. t .. "</span>"
     end,
 }
 
