@@ -34,8 +34,8 @@ local time = wibox.widget({
         widget = wibox.container.margin,
         margins = 10,
         {
-            widget = wibox.widget.textclock("%l:%M %p"),
-            font = beautiful.font_name .. " Bold 11",
+            widget = wibox.widget.textclock("%a %b %d %l:%M %p"),
+            font = beautiful.font_name .. ", Bold 15",
             align = "center",
         },
     },
@@ -94,7 +94,80 @@ screen.connect_signal("request::desktop_decoration", function(s)
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
         screen  = s,
-        filter  = awful.widget.taglist.filter.all,
+        filter = function(c) return c.index < 6 end,
+        widget_template = {
+            {
+                {
+                    {
+                        id     = 'index_role',
+                        widget = wibox.widget.textbox,
+                        visible = false,
+                    },
+                    {
+                        id     = 'text_role',
+                        widget = wibox.widget.textbox,
+                    },
+                    spacing = dpi(7),
+                    layout = wibox.layout.fixed.horizontal,
+                },
+                left = dpi(0),
+                right = dpi(0),
+                widget = wibox.container.margin,
+            },
+            id     = 'background_role',
+            widget = wibox.container.background,
+            --shape = helpers.rrect(10),
+            -- Add support for hover colors and an index label
+            create_callback = function(self, c3, index, objects) --luacheck: no unused args
+                self:get_children_by_id('index_role')[1].markup = '<b> '..index..' </b>'
+                self:connect_signal('mouse::enter', function()
+
+                    -- BLING: Only show widget when there are clients in the tag
+                    if #c3:clients() > 0 then
+                        -- BLING: Update the widget with the new tag
+                        awesome.emit_signal("bling::tag_preview::update", c3)
+                        -- BLING: Show the widget
+                        awesome.emit_signal("bling::tag_preview::visibility", s, true)
+                    end
+
+                    if self.bg ~= beautiful.bg_focus then
+                        self.backup     = self.bg
+                        self.has_backup = true
+                    end
+                    self.bg = beautiful.bg_focus
+                    self.shape = helpers.rrect(10)
+                end)
+                self:connect_signal('mouse::leave', function()
+
+                    -- BLING: Turn the widget off
+                    awesome.emit_signal("bling::tag_preview::visibility", s, false)
+
+                    if self.has_backup then self.bg = self.backup end
+                end)
+            end,
+            update_callback = function(self, c3, index, objects) --luacheck: no unused args
+                self:get_children_by_id('index_role')[1].markup = '<b> '..index..' </b>'
+            end,
+        },
+        buttons = {
+            awful.button({ }, 1, function(t) t:view_only() end),
+            awful.button({ modkey }, 1, function(t)
+                                            if client.focus then
+                                                client.focus:move_to_tag(t)
+                                            end
+                                        end),
+            awful.button({ }, 3, awful.tag.viewtoggle),
+            awful.button({ modkey }, 3, function(t)
+                                            if client.focus then
+                                                client.focus:toggle_tag(t)
+                                            end
+                                        end),
+        }
+    }
+
+    s.mytaglist2 = awful.widget.taglist {
+        screen  = s,
+        filter = function(c) return c.index > 5 end,
         widget_template = {
             {
                 {
@@ -235,20 +308,33 @@ screen.connect_signal("request::desktop_decoration", function(s)
         stretch = false,
         margins = {top = dpi(4), bottom = dpi(4)},
         visible = true,
-        width    = dpi(110),
+        width   = dpi(110),
         shape = rrect(wibar_border_radius),
         screen   = s,
-        widget = {
+        widget = 
+        {
             {
                 {
-                    layout = wibox.layout.align.horizontal,
-                    time,
+                    {
+                        markup = helpers.colorize_text("1", beautiful.fg_minimize),
+                        font = beautiful.font_name .. ", Bold 15",
+                        widget = wibox.widget.textbox,
+                    },
+                    {
+                        markup = helpers.colorize_text("2", beautiful.fg_minimize),
+                        font = beautiful.font_name .. ", Bold 15",
+                        widget = wibox.widget.textbox,
+                    },
+                    spacing = dpi(15),
+                    widget = wibox.layout.flex.horizontal,
                 },
-                left = dpi(15),
-                right = dpi(15),
+                left = dpi(30),
+                right = dpi(30),
+                top = dpi(4),
                 widget = wibox.container.margin,
             },
             forced_height = dpi(38),
+            forced_width = dpi(110),
             shape = rrect(beautiful.border_radius),
             widget = wibox.container.background,
         },
@@ -273,15 +359,17 @@ screen.connect_signal("request::desktop_decoration", function(s)
         screen = s,
         widget = {
                 {
+                    { -- Left widgets
+                    layout = wibox.layout.fixed.horizontal,
                     {
-                        layout = wibox.layout.align.horizontal,
-                        { -- Left widgets
-                        layout = wibox.layout.fixed.horizontal,
                         {
                             s.mytaglist,
-                            margins = dpi(2),
-                            widget = wibox.container.margin,
+                            s.mytaglist2,
+                            visible = true,
+                            layout = wibox.layout.fixed.horizontal,
                         },
+                        margins = dpi(2),
+                        widget = wibox.container.margin,
                     },
                 },
                 left = dpi(15),
@@ -315,7 +403,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
                         layout = wibox.layout.align.horizontal,
                         { -- Right widgets
                         layout = wibox.layout.fixed.horizontal,
-                        mytextclock,
+                        time,
                         battery_widget,
                         action_icon,
                     },
