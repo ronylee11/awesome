@@ -10,7 +10,7 @@ local theme = {}
 
 theme.confdir = os.getenv("HOME") .. "/.config/awesome/theme/night"
 theme.wallpaper = theme.confdir .. "/wall/fabrizio-conti-_6LZtmrss08-unsplash.jpg"
-theme.font_name = "Iosevka Nerd Font"
+theme.font_name = "Wavy"
 theme.taglist_font = "FiraCode Nerd Font, 14"
 theme.background = "#1a1b26"
 theme.foreground = "#c0caf5"
@@ -34,10 +34,10 @@ theme.darker_bg = "#0A1419"
 theme.lighter_bg = "#162026"
 theme.transparent = "#00000000"
 
-theme.font = "Iosevka Nerd Font, Bold 10"
-theme.font_name = "Iosevka Nerd Font"
-theme.icon_font = "Iosevka Nerd Font"
-theme.icon_font2 = "Iosevka Nerd Font"
+theme.font = "Wavy, Bold 11"
+theme.font_name = "Wavy"
+theme.icon_font = "Wavy"
+theme.icon_font2 = "Wavy"
 
 theme.bg = "#17171C"
 theme.bg_normal   = "#061115"
