@@ -5,8 +5,8 @@ local awful = require("awful")
 -- Table of layouts to cover with awful.layout.inc, order matters.
 tag.connect_signal("request::default_layouts", function()
     awful.layout.append_default_layouts({
-        awful.layout.suit.fair,
         awful.layout.suit.tile,
+        awful.layout.suit.fair,
         awful.layout.suit.tile.left,
         awful.layout.suit.tile.bottom,
         awful.layout.suit.tile.top,
