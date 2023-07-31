@@ -260,7 +260,8 @@ screen.connect_signal("request::desktop_decoration", function(s)
     client.connect_signal("property::fullscreen", remove_wibar)
     ---}}}
 
-    local wibar_border_radius = 20
+    local bar_border_radius = 20
+    local bar_from_top = dpi(10)
 
     -- Create the empty wibox
     s.mywibox = awful.wibar ({
@@ -289,7 +290,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
         margins = {top = dpi(4), bottom = dpi(4)},
         visible = true,
         width   = dpi(110),
-        shape = helpers.rrect(wibar_border_radius),
+        shape = helpers.rrect(bar_border_radius),
         screen   = s,
         widget = 
         {
@@ -306,7 +307,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
             widget = wibox.container.background,
         },
         placement = function(c)
-            (awful.placement.top_left)(c, { margins = { top = dpi(15), left = dpi(15) } })
+            (awful.placement.top_left)(c, { margins = { top = bar_from_top, left = dpi(15) } })
         end
     }
 
@@ -320,7 +321,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
         visible = true,
         width    = dpi(462),
         --width = s.geometry.width - dpi(30),
-        shape = helpers.rrect(wibar_border_radius),
+        shape = helpers.rrect(bar_border_radius),
         screen = s,
         widget = {
                 {
@@ -346,7 +347,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
             widget = wibox.container.background,
         },
         placement = function(c)
-            (awful.placement.top)(c, { margins = { top = dpi(15) } })
+            (awful.placement.top)(c, { margins = { top = bar_from_top } })
         end
     }
 
@@ -359,7 +360,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
         top = dpi(4),
         visible = true,
         width    = dpi(265),
-        shape = helpers.rrect(wibar_border_radius),
+        shape = helpers.rrect(bar_border_radius),
         screen = s,
         widget = {
                 {
@@ -381,7 +382,7 @@ screen.connect_signal("request::desktop_decoration", function(s)
             widget = wibox.container.background,
         },
         placement = function(c)
-            (awful.placement.top_right)(c, { margins = { top = dpi(15), right = dpi(15) } })
+            (awful.placement.top_right)(c, { margins = { top = bar_from_top, right = dpi(15) } })
         end
     }
 end)
