@@ -3,6 +3,8 @@ local gears = require("gears")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local helpers = require("helpers")
+local xresources = require("beautiful.xresources")
+local dpi = xresources.apply_dpi
 
 local which_disk = "/dev/nvme0n1p5"
 
@@ -17,12 +19,15 @@ end
 
 local slider = wibox.widget({
     bar_shape = require("helpers").rrect(9),
-    bar_height = 6,
-    bar_color = beautiful.bg_focus,
-    bar_active_color = beautiful.red,
-    handle_width = 0,
+    shape = require("helpers").rrect(9),
+    background_color = beautiful.bg_focus,
+    color = beautiful.red,
     value = get_disk(),
-    widget = wibox.widget.slider,
+    margins = { top = dpi(10), bottom = dpi(10) },
+    forced_width = dpi(400),
+    forced_height = dpi(6),
+    max_value = 100,
+    widget = wibox.widget.progressbar,
 })
 
 local sto_slider = wibox.widget({
@@ -33,7 +38,16 @@ local sto_slider = wibox.widget({
         valign = "center",
         widget = wibox.widget.textbox(),
     },
-    slider,
+    {
+        slider,
+        {
+            markup  = helpers.colorize_text(get_disk() .. "%", beautiful.fg_minimize),
+            widget = wibox.widget.textbox,
+            align = "center",
+            font = beautiful.font_name .. " Bold 10",
+        },
+        layout = wibox.layout.stack,
+    },
     layout = wibox.layout.fixed.horizontal,
     spacing = 0,
 })
