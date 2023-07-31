@@ -83,4 +83,7 @@ Rubato - [https://github.com/andOrlando/rubato.git](https://github.com/andOrland
 Background Picture: <br/>
 Fabrizio Conti - [mountains under blue and grey sky](https://unsplash.com/photos/_6LZtmrss08) <br/>
 
+Rofi config: <br/>
+adi1090x - [https://github.com/adi1090x/rofi](https://github.com/adi1090x/rofi)
+
 Big thanks to these pioneers!
