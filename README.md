@@ -6,16 +6,14 @@ with first 5 tags showing as page 1, another 5 tags showing as page 2
 
 # Demo
 
-demo of current progress
-
-![Current Progress](./.github/demo.gif)
+![Demo](./.github/demo.gif)
 
 # Design
 
 My Designs on Paper <br/>
-Design of bar
+Design of bar (done)
 ![Design of bar](./.github/design.png)
-Design of titlebar on file browser
+Design of titlebar on file browser (abandoned, looks kinda ugly in hindsight lol)
 ![Design of titlebar](./.github/booklet.png)
 
 # Usage
