@@ -1,9 +1,10 @@
 local config = {}
+local gears = require("gears")
 
 config.apps = {
     terminal = "alacritty",
     editor = "alacritty" .. " -c " .. "nvim",
-    browser = "google-chrome-stable",
+    browser = "firefox",
     music = "spotify",
     launcher = "launcher",
     run = "run",
@@ -18,34 +19,12 @@ config.actions = {
     logout = "loginctl kill-session ''",
     lock = "loginctl lock-session",
     -- screenshot
-    screenshot = "scrot --multidisp --exec 'mv $f ~/Pictures/ && xdg-open ~/Pictures/$f'",
-    screenshot_area = "scrot --select --freeze --exec 'mv $f ~/Pictures/ && xdg-open ~/Pictures/$f'",
-    screenshot_window = "scrot --focused --border --exec 'mv $f ~/Pictures/ && xdg-open ~/Pictures/$f'",
-    screenshot_delay = "scrot --delay 5 --exec 'mv $f ~/Pictures/ && xdg-open ~/Pictures/$f'",
+    screenshot = "scrot --multidisp --exec 'mv $f ".. os.getenv("HOME") .. "/Pictures/Screenshots/ && xdg-open ".. os.getenv("HOME") .. "/Pictures/Screenshots/$f'",
+    screenshot_area = "scrot --select --freeze --exec 'mv $f ".. os.getenv("HOME") .. "/Pictures/Screenshots/ && xdg-open ".. os.getenv("HOME") .. "/Pictures/Screenshots/$f'",
+    screenshot_window = "scrot --focused --border --exec 'mv $f ".. os.getenv("HOME") .. "/Pictures/Screenshots/ && xdg-open ".. os.getenv("HOME") .. "/Pictures/Screenshots/$f'",
+    screenshot_delay = "scrot --delay 5 --exec 'mv $f ".. os.getenv("HOME") .. "/Pictures/Screenshots/ && xdg-open ".. os.getenv("HOME") .. "/Pictures/Screenshots/$f'",
     -- other
-    randomize_wallpaper = "nitrogen --random --set-zoom-fill --save",
-}
-
-config.keys = {
-    super = "Mod4",
-    alt = "Mod1",
-    shift = "Shift",
-    control = "Control",
-}
-
-config.tags = {
-    name = {
-        "Terminal",
-        "Code",
-        "Chromium",
-        "Files",
-        "Document",
-        "Media",
-        "Tools",
-        "Chat",
-        "Game",
-        "General",
-    },
+    show_album = "sxiv -t ".. os.getenv("HOME") .. "/Pictures/*",
 }
 
 return config

@@ -91,7 +91,7 @@ local mousemenu = build_menu({
         },
     },
     after = {
-        { "Randomize wallpaper", config.actions.randomize_wallpaper, beautiful.image_icon },
+        { "Album", config.actions.show_album, beautiful.image_icon },
         { "Take screenshot", config.actions.screenshot, beautiful.camera_icon },
         { "Lock", config.actions.lock, beautiful.lock_icon },
         { "Logout", config.actions.logout, beautiful.logout_icon },
