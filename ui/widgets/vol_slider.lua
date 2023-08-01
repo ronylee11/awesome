@@ -3,6 +3,7 @@ local gears = require("gears")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local helpers = require("helpers")
+local naughty = require("naughty")
 
 local function get_volume()
     local script = "pamixer --get-volume"
@@ -60,6 +61,30 @@ awful.spawn.easy_async_with_shell("pamixer --get-volume", function(stdout)
     local value = string.gsub(stdout, "^%s*(.-)%s*$", "%1")
     vol_slider.value = tonumber(value)
 end)
+
+local function updateSlider()
+    awful.spawn.easy_async_with_shell("pamixer --get-volume", function(stdout)
+        local value = stdout
+        vol_slider.children[2].value = tonumber(value)
+    end)
+    awful.spawn.easy_async_with_shell("pamixer --get-mute", function(stdout)
+        local value = string.gsub(stdout, "^%s*(.-)%s*$", "%1")
+        if value == "true" then
+            vol_slider.children[1].markup = helpers.colorize_text("  ", beautiful.red)
+            vol_slider.children[2].bar_active_color = beautiful.red
+            vol_slider.children[2].handle_color = beautiful.red
+        else
+            vol_slider.children[1].markup = helpers.colorize_text("  ", beautiful.blue)
+            vol_slider.children[2].bar_active_color = beautiful.blue
+            vol_slider.children[2].handle_color = beautiful.blue
+        end
+    end)
+end
+
+-- detect changes in volume, mute, unmute, then update the widget
+awesome.connect_signal("volume::increase", updateSlider)
+awesome.connect_signal("volume::decrease", updateSlider)
+awesome.connect_signal("volume::mute", updateSlider)
 
 slider:connect_signal("property::value", function(_, new_value)
     vol_slider.value = new_value

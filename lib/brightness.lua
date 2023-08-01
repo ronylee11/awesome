@@ -85,6 +85,7 @@ brightness.increase = function()
 	awful.spawn.with_shell(script)
   brightness.get_brightness()
   brightness.changed()
+  awesome.emit_signal("brightness::increase")
 end
 
 brightness.decrease = function()
@@ -95,6 +96,7 @@ brightness.decrease = function()
 	awful.spawn.with_shell(script)
   brightness.get_brightness()
   brightness.changed()
+  awesome.emit_signal("brightness::decrease")
 end
 
 return brightness

@@ -48,6 +48,20 @@ awful.spawn.easy_async_with_shell(
     end
 )
 
+local function updateSlider()
+    awful.spawn.easy_async_with_shell(
+        "brightnessctl | grep -i  'current' | awk '{ print $4}' | tr -d \"(%)\"",
+        function(stdout)
+            local value = string.gsub(stdout, "^%s*(.-)%s*$", "%1")
+            slider.value = tonumber(value)
+        end
+    )
+end
+
+-- detect changes in brightness, and update the widget
+awesome.connect_signal("brightness::increase", updateSlider)
+awesome.connect_signal("brightness::decrease", updateSlider)
+
 slider:connect_signal("property::value", function(_, new_value)
     slider.value = new_value
     awful.spawn("brightnessctl set " .. new_value .. "%", false)

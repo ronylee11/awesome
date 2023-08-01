@@ -92,6 +92,7 @@ volume.increase = function()
     awful.spawn(script, false)
     volume.get_vol()
     volume.changed()
+    awesome.emit_signal("volume::increase")
 end
 
 volume.decrease = function()
@@ -102,6 +103,7 @@ volume.decrease = function()
     awful.spawn(script, false)
     volume.get_vol()
     volume.changed()
+    awesome.emit_signal("volume::decrease")
 end
 
 volume.mute = function()
@@ -112,6 +114,7 @@ volume.mute = function()
     awful.spawn(script, false)
     volume.get_vol()
     volume.changed()
+    awesome.emit_signal("volume::mute")
 end
 
 return volume
