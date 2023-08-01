@@ -53,7 +53,7 @@ awful.keyboard.append_global_keybindings({
               {description = "increase volume", group = "launcher"}),
     awful.key({ modkey }, "Down", function() volume.decrease() end,
               {description = "decrease volume", group = "launcher"}),
-    awful.key({ modkey, "Control" }, "v", function() awful.spawn("pavucontrol") end, 
+    awful.key({ "Ctrl", "Shift" }, "v", function() awful.spawn("pavucontrol") end, 
               { description = " Audio Contol all ", group = "control" }),
     -- Brightness
 	awful.key({}, "XF86MonBrightnessUp", function() brightness.increase() end,
