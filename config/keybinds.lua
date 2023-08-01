@@ -10,6 +10,7 @@ local brightness = require "lib.brightness"
 local naughty = require("naughty")
 local mousemenu = require("ui.popup.mousemenu")
 local calender = require("ui.popup.calender")
+local helpers = require("helpers")
 
 -- {{{ Mouse bindings
 awful.mouse.append_global_mousebindings({
@@ -99,7 +100,7 @@ awful.keyboard.append_global_keybindings({
     awful.key({ altkey }, "q", function() F.calender.toggle() end, 
               {description = "spawn calender", group = "launcher"}),
     -- Test Notification
-    awful.key({ altkey, "Shift" }, "x", function() naughty.notify({ app_name = "Master Ouch", title = "Achtung!", text = "You're idling You're idling You're idling You're idling You're idling You're idling You're idling You're idling", icon = gears.filesystem.get_configuration_dir() .. "/misc/yawn.png", timeout = 3 }) end, 
+    awful.key({ altkey, "Shift" }, "x", function() naughty.notify({ app_name = "Master Ouch", title = "Achtung!", text = helpers.filter_ampersand("You're idling You're idling & You're idling You're idling You're idling You're idling You're idling You're idling"), icon = gears.filesystem.get_configuration_dir() .. "/misc/yawn.png", timeout = 3 }) end, 
               {description = "spawn widget", group = "launcher"}),
 })
 

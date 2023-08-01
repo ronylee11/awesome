@@ -189,4 +189,10 @@ function helpers.scratchpad(match, spawn_cmd, spawn_args)
     end
 end
 
+function helpers.filter_ampersand(text)
+    if not text then return end
+    return text:gsub("&", "and")
+end
+
+
 return helpers

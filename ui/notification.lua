@@ -111,7 +111,7 @@ naughty.connect_signal("request::display", function(n)
     local title_n = wibox.widget({
         {
             {
-                markup = n.title,
+                markup = helpers.filter_ampersand(n.title),
                 font = beautiful.font_name .. ", Bold 13",
                 align = "left",
                 valign = "center",
@@ -130,7 +130,7 @@ naughty.connect_signal("request::display", function(n)
         {
             {
                 markup = helpers.colorize_text(
-                "<span weight='normal'>" .. n.message .. "</span>",
+                "<span weight='normal'>" .. helpers.filter_ampersand(n.message) .. "</span>",
                 beautiful.fg_normal .. "BF"
                 ),
                 font = beautiful.font_name .. ", Bold 11",
@@ -149,7 +149,7 @@ naughty.connect_signal("request::display", function(n)
     })
 
     local app_name_n = wibox.widget({
-        markup = helpers.colorize_text(n.app_name, beautiful.fg_normal .. "BF"),
+        markup = helpers.colorize_text(helpers.filter_ampersand(n.app_name), beautiful.fg_normal .. "BF"),
         font = beautiful.font_name .. " 10",
         align = "left",
         valign = "center",
