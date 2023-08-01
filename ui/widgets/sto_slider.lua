@@ -5,6 +5,7 @@ local beautiful = require("beautiful")
 local helpers = require("helpers")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
+local naughty = require("naughty")
 
 local which_disk = "/dev/nvme0n1p5"
 
@@ -51,5 +52,10 @@ local sto_slider = wibox.widget({
     layout = wibox.layout.fixed.horizontal,
     spacing = 0,
 })
+
+awesome.connect_signal("storage::update", function()
+    sto_slider.children[2].children[1].value = get_disk()
+    sto_slider.children[2].children[2].markup = helpers.colorize_text(get_disk() .. "%", beautiful.fg_minimize)
+end)
 
 return sto_slider

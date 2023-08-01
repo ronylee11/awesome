@@ -63,6 +63,7 @@ battery_closure = battery.closure()
 
 function battery_update()
     battery_widget:set_text(" " .. battery_closure() .. " ")
+    awesome.emit_signal("storage::update")
 end
 
 battery_update()
