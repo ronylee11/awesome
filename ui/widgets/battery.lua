@@ -1,5 +1,7 @@
 local io = io
 local math = math
+local gears = require("gears")
+local naughty = require("naughty")
 
 local battery = {}
 
@@ -58,13 +60,17 @@ end
 function battery.closure()
     local adapters = get_adapters()
     return function()
-        local prefix = "🔋"
+        local prefix = "⚡"
         local batteries = ""
         for i = 1, #adapters do
             adapter = adapters[i]
             local battery, dir = get_bat_state(adapter)
             if dir == -1 then
-                prefix = "🪫"
+                prefix = "🔋"
+                if tonumber(battery) <= 20 then
+                    prefix = "🪫"
+                    naughty.notify({ app_name = "Notification", title = "Low Battery!", text = "Battery is low!", icon = gears.filesystem.get_configuration_dir() .. "/misc/yawn.png", timeout = 3 })
+                end
             end
             battery = battery .. "%"
             batteries = batteries .. " " .. battery .. " "

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+CHECK=`rnnoise status | grep "not loaded"`
+if [[ $CHECK == "" ]]; then
+  echo "rnnoise is loaded gozaru"
+else
+  echo "rnnoise is not loaded desu"
+  rnnoise activate
+fi
+  

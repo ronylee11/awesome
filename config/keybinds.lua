@@ -83,7 +83,7 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey }, ".", function() awful.util.spawn_with_shell("rofi -modi emoji -show emoji") end,
               {description = "emoji", group = "launcher"}),
     -- Show Timetable
-    awful.key({ altkey }, "t", function() awful.util.spawn_with_shell("feh --zoom 110 -F $HOME/timetable.png") end,
+    awful.key({ altkey }, "t", function() awful.util.spawn_with_shell("feh --zoom 110 -F $HOME/timetable.jpg") end,
               {description = "timetable", group = "launcher"}),
     -- Powermenu
     awful.key({ "Ctrl", "Shift" }, "l", function() awful.util.spawn_with_shell(gears.filesystem.get_configuration_dir() .. "misc/rofi/powermenu/powermenu.sh") end,
