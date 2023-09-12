@@ -63,7 +63,7 @@ case $chosen in
 		#ans=$(confirm_exit &)
 		ans="yes"
 		if [[ $ans == "yes" || $ans == "YES" || $ans == "y" || $ans == "Y" ]]; then
-            shutdown --now
+            shutdown now
 		elif [[ $ans == "no" || $ans == "NO" || $ans == "n" || $ans == "N" ]]; then
 			exit 0
         else
