@@ -41,7 +41,8 @@ theme.icon_font = "Iosevka Nerd Font"
 theme.icon_font2 = "Iosevka Nerd Font"
 
 theme.bg = "#17171C"
-theme.bg_normal   = "#061115"
+--theme.bg_normal   = "#061115"
+theme.bg_normal   = "#161821"
 theme.bg_subtle   = "#0a171c"
 theme.bg_focus    = "#1C252C"
 theme.bg_cal      = "#78B892"
@@ -66,7 +67,8 @@ theme.titlebar_bg_normal = theme.bg_normal
 
 theme.taglist_fg_focus = "#8cedff"
 theme.taglist_fg_occupied = "#e4ad7b"
-theme.taglist_bg_focus = "#061115"
+--theme.taglist_bg_focus = "#061115"
+theme.taglist_bg_focus = "#161821"
 
 -- Generate taglist squares:
 local taglist_square_size = dpi(0)
