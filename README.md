@@ -75,6 +75,13 @@ Modkey+Shift+Enter - launch alacritty terminal
 
 (Do feel free to change and modify them to your own likings!)
 
+# Bugs to be Fixed 🪲
+
+- Left clicking top left and bottom left corner will produce error
+  ```
+  /usr/share/awesome/lib/awful/button.lua:160: attempt to call a table value (upvalue 'value')
+  ```
+
 # Credits
 
 Inspirations from: <br/>
