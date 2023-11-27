@@ -17,22 +17,23 @@ client.connect_signal("request::titlebars", function(c)
         end),
     }
 
-    awful
-        .titlebar(c, {
-            size = 0.5,
-            position = "left",
-        })
-        .widget = {
+    awful.titlebar(c, { size = 0, position = "left" }).widget = {
         { -- Left
-            --awful.titlebar.widget.iconwidget(c),
+            awful.titlebar.widget.iconwidget(c),
             buttons = buttons,
             layout  = wibox.layout.fixed.horizontal
         },
         { -- Middle
-            --{ -- Title
-                --halign = "center",
-                --widget = awful.titlebar.widget.titlewidget(c)
-            --},
+            {
+                { -- Title
+                    halign = "center",
+                    valign = "center",
+                    font = "Wavy 20",
+                    widget = awful.titlebar.widget.titlewidget(c)
+                },
+                direction = 'east',
+                widget = wibox.container.rotate,
+            },
             buttons = buttons,
             layout  = wibox.layout.flex.horizontal
         },
