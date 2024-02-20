@@ -7,7 +7,9 @@ with first 5 tags showing as page 1, another 5 tags showing as page 2
 # Intro
 
 quick demo of the setup
-![Demo](./.github/demo.gif)
+
+![Demo](./.github/awesome-demo.gif)
+
 Whats the special sauce for this rice you might ask? <br/>
 ...
 
