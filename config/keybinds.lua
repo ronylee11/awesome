@@ -41,7 +41,7 @@ awful.keyboard.append_global_keybindings({
     awful.key({ altkey }, "Return", function() awful.util.spawn("rofi -show drun") end,
               { description = "run prompt", group = "launcher" }),
     -- File Browser
-    awful.key({ modkey }, "e", function() awful.util.spawn("Thunar") end, 
+    awful.key({ modkey }, "e", function() awful.util.spawn_with_shell(os.getenv("XDG_DEFAULT_FILE_MANAGER") or "thunar") end,
               { description = "run Thunar", group = "launcher" }),
     -- Audio
     awful.key({}, "XF86AudioRaiseVolume", function() volume.increase() end,
