@@ -92,7 +92,7 @@ awful.keyboard.append_global_keybindings({
     awful.key({ altkey, "Ctrl" }, "x", function() awful.util.spawn("xkill") end,
               {description = "powermenu", group = "launcher"}),
     -- Summon Train -- F13
-    awful.key({}, "XF86Tools", function() awful.util.spawn("alacritty -e \"sl\"") end,
+    awful.key({}, "XF86Tools", function() awful.util.spawn("playerctl next") end,
               {description = "train", group = "launcher"}),
     -- Spawn widget
     awful.key({ altkey }, "c", function() F.action.toggle() end, 
