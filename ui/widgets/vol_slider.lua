@@ -24,6 +24,15 @@ local function get_muted()
     return result:match("true")
 end
 
+--markup will mute or unmute the volume on click
+local markup = function()
+    if get_muted() == "true" then
+        return helpers.colorize_text("  ", beautiful.red)
+    else
+        return helpers.colorize_text("  ", beautiful.blue)
+    end
+end
+
 local slider = wibox.widget({
     bar_shape = require("helpers").rrect(9),
     bar_height = 6,
@@ -40,11 +49,8 @@ helpers.add_hover_cursor(slider, "hand1")
 
 local vol_slider = wibox.widget({
     {
-        markup = helpers.colorize_text("  ", beautiful.blue),
-        font = beautiful.icon_font2 .. " 14",
-        align = "center",
-        valign = "center",
-        widget = wibox.widget.textbox(),
+        markup = markup(),
+        widget = wibox.widget.textbox,
     },
     slider,
     layout = wibox.layout.fixed.horizontal,
@@ -81,10 +87,21 @@ local function updateSlider()
     end)
 end
 
+local function toggleMute()
+    awful.spawn("pamixer -t", false)
+    updateSlider()
+end
+
 -- detect changes in volume, mute, unmute, then update the widget
 awesome.connect_signal("volume::increase", updateSlider)
 awesome.connect_signal("volume::decrease", updateSlider)
 awesome.connect_signal("volume::mute", updateSlider)
+
+vol_slider.children[1]:connect_signal("button::press", function(_, _, _, button)
+    if button == 1 then
+        toggleMute()
+    end
+end)
 
 slider:connect_signal("property::value", function(_, new_value)
     vol_slider.value = new_value
